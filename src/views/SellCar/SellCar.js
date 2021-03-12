@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSafeDispatch } from "../../hooks/useSafeDispatch";
 import { getBrands } from "../../service/brand.service";
-import { createAdvert } from "../../service/advert.service";
+import { createAdvert, uploadFile } from "../../service/advert.service";
 import { typeOfCar, fuel, colors, typeOfTransmision } from "./data";
 import Select from "react-select";
 import YearPicker from "react-year-picker";
@@ -38,6 +38,19 @@ const SellCar = () => {
       setState({ ...state, year: e });
     }
   };
+
+  const handleUpload = async (e) => {
+    try {
+      const uploadData = new FormData();
+      uploadData.append("image", e.target.files[0]);
+
+      const { data } = await uploadFile(uploadData);
+      setState({ ...state, image: data });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
 
   const getAllBrands = async () => {
     try {
@@ -79,7 +92,11 @@ const SellCar = () => {
           />
 
           <label htmlFor="car-image">Añade fotos a tu anuncio</label>
-          <input type="file" value={state.image} onChange={handleChange} />
+          <input
+            type="file"
+            name="image"
+            onChange={handleUpload}
+          />
 
           <label htmlFor="brand-car">¿Qué marca de coche es?</label>
           <Select
