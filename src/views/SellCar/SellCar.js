@@ -17,7 +17,7 @@ const SellCar = () => {
     model: "",
     horsePower: "",
     color: "",
-    image: "",
+    image: [],
     otherInformation: "",
   };
 
@@ -45,13 +45,13 @@ const SellCar = () => {
       uploadData.append("image", e.target.files[0]);
 
       const { data } = await uploadFile(uploadData);
-      setState({ ...state, image: data });
+      const imageCopy = state.image.concat(data);
+      setState({ ...state, image: imageCopy });
     } catch (e) {
       console.error(e);
     }
   };
-
-
+  console.log(state.image);
   const getAllBrands = async () => {
     try {
       const { data } = await getBrands();
@@ -76,7 +76,7 @@ const SellCar = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newAdvert = await createAdvert(state);
+    await createAdvert(state);
     setState(initialState);
   };
   return (
@@ -92,11 +92,11 @@ const SellCar = () => {
           />
 
           <label htmlFor="car-image">Añade fotos a tu anuncio</label>
-          <input
-            type="file"
-            name="image"
-            onChange={handleUpload}
-          />
+          <input type="file" name="image" onChange={handleUpload} />
+          <input type="file" name="image" onChange={handleUpload} />
+          <input type="file" name="image" onChange={handleUpload} />
+          <input type="file" name="image" onChange={handleUpload} />
+          <input type="file" name="image" onChange={handleUpload} />
 
           <label htmlFor="brand-car">¿Qué marca de coche es?</label>
           <Select
