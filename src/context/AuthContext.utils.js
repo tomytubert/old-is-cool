@@ -23,7 +23,7 @@ export function defaultUser() {
 
 export function getLocalUser() {
   const user = localStorage.getItem("user");
-  return user ? JSON.parse(JSON.stringify(user)) : defaultUser();
+  return user ? JSON.parse(user) : defaultUser();
 }
 
 export function saveUser(user) {

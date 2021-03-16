@@ -4,7 +4,12 @@ import { useAuth } from "../../context/AuthContext.utils";
 
 function PrivateRoute({ path, exact, children }) {
   const { user } = useAuth();
+  // const prueba = JSON.parse(user)
+
+  // const userObject = JSON.parse(JSON.stringify(user))
+  // const userObject = JSON.parse(user)
   if (!user.isLogged) {
+    console.log(user);
     return <Redirect to="/login" />;
   }
 

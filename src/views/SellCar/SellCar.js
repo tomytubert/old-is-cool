@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useSafeDispatch } from "../../hooks/useSafeDispatch";
 import { getBrands } from "../../service/brand.service";
 import { createAdvert, uploadFile } from "../../service/advert.service";
-import { typeOfCar, fuel, colors, typeOfTransmision } from "./data";
+import { typeOfCar, fuel, colors, typeOfTransmision, getAllAddress } from "./data";
 import Select from "react-select";
 import YearPicker from "react-year-picker";
+import { useAuth } from "../../context/AuthContext.utils";
 
 const SellCar = () => {
+  const {user} = useAuth()
+
   const initialState = {
     brand: "",
     typeOfCar: "",
@@ -19,7 +22,12 @@ const SellCar = () => {
     color: "",
     image: [],
     otherInformation: "",
+    price: 0,
+    address: "",
+    // user: user.id
   };
+
+
 
   const [state, unsafeSetState] = useState(initialState);
   const [brands, setBrands] = useState([]);
@@ -29,16 +37,18 @@ const SellCar = () => {
 
   const handleChange = (e) => {
     if (e.value) {
-      setState({ ...state, [e.name]: e.value });
+      unsafeSetState({ ...state, [e.name]: e.value });
+      console.log("value",e.value);
     }
     if (e.target) {
-      setState({ ...state, [e.target.name]: e.target.value });
+      unsafeSetState({ ...state, [e.target.name]: e.target.value });
+      console.log("target",e.value);
     }
     if (typeof e === "number") {
-      setState({ ...state, year: e });
+      unsafeSetState({ ...state, year: e });
     }
   };
-
+  console.log("state",state);
   const handleUpload = async (e) => {
     try {
       const uploadData = new FormData();
@@ -46,12 +56,12 @@ const SellCar = () => {
 
       const { data } = await uploadFile(uploadData);
       const imageCopy = state.image.concat(data);
-      setState({ ...state, image: imageCopy });
+      unsafeSetState({ ...state, image: imageCopy });
     } catch (e) {
       console.error(e);
     }
   };
-  console.log(state.image);
+
   const getAllBrands = async () => {
     try {
       const { data } = await getBrands();
@@ -91,6 +101,14 @@ const SellCar = () => {
             onChange={handleChange}
           />
 
+          <label htmlFor="address">Provincia</label>
+          <Select
+            placeholder={getAllAddress()[0].value}
+            defaultValue={""}
+            options={getAllAddress()}
+            onChange={handleChange}
+          />
+
           <label htmlFor="car-image">Añade fotos a tu anuncio</label>
           <input type="file" name="image" onChange={handleUpload} />
           <input type="file" name="image" onChange={handleUpload} />
@@ -107,7 +125,7 @@ const SellCar = () => {
           />
 
           <label htmlFor="year">Año</label>
-          <YearPicker name="year" onChange={handleChange} value={state.year} />
+          <YearPicker name="year" onChange={handleChange} />
 
           <label htmlFor="fuel">Combustible</label>
           <Select
@@ -155,6 +173,14 @@ const SellCar = () => {
             defaultValue={""}
             options={colors}
             onChange={handleChange}
+          />
+
+          <label htmlFor="Precio">Precio</label>
+          <input
+            type="number"
+            name="price"
+            onChange={handleChange}
+            value={state.price}
           />
 
           <label htmlFor="Otra-informacion">¿Quieres indicar algo más?</label>

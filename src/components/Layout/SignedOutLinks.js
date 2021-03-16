@@ -1,13 +1,16 @@
 import React from "react";
-import {NavLink} from "react-router-dom"
+import { NavMenu, NavBtnLink } from "./style";
 
 const SignedOutLinks = () => {
-    return ( 
-        <ul className="right">
-            <li><NavLink to="/signup">Signup</NavLink></li>
-            <li><NavLink to="/login">Login</NavLink></li>
-        </ul>
-     );
-}
- 
+  return (
+    <NavMenu className="right">
+      <NavBtnLink to="/vender-mi-coche-clasico">Nuevo Anuncio</NavBtnLink>
+      <NavBtnLink to="/:userId">Mi Cuenta</NavBtnLink>
+      <NavBtnLink to="/coches-clasicos">Encuentra tu coche</NavBtnLink>
+      {/* <NavBtnLink to="/signup">Signup</NavBtnLink> */}
+      <NavBtnLink to="/login">Login</NavBtnLink>
+    </NavMenu>
+  );
+};
+
 export default SignedOutLinks;
