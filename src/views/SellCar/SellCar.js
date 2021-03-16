@@ -37,15 +37,15 @@ const SellCar = () => {
 
   const handleChange = (e) => {
     if (e.value) {
-      setState({ ...state, [e.name]: e.value });
+      unsafeSetState({ ...state, [e.name]: e.value });
       console.log("value",e.value);
     }
     if (e.target) {
-      setState({ ...state, [e.target.name]: e.target.value });
+      unsafeSetState({ ...state, [e.target.name]: e.target.value });
       console.log("target",e.value);
     }
     if (typeof e === "number") {
-      setState({ ...state, year: e });
+      unsafeSetState({ ...state, year: e });
     }
   };
   console.log("state",state);
@@ -56,7 +56,7 @@ const SellCar = () => {
 
       const { data } = await uploadFile(uploadData);
       const imageCopy = state.image.concat(data);
-      setState({ ...state, image: imageCopy });
+      unsafeSetState({ ...state, image: imageCopy });
     } catch (e) {
       console.error(e);
     }

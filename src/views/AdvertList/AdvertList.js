@@ -14,11 +14,11 @@ const AdvertList = () => {
   }, []);
 
   return (
-    <>
+    <div style={{display:"flex",justifyContent:"space-evenly",flexWrap:"wrap",paddingBottom:"100px"}}>
       {state.map((item, idx) => (
-          <AdvertCard key={item._id} props={item} />
+        <AdvertCard key={item._id} props={item} />
       ))}
-    </>
+    </div>
   );
 };
 

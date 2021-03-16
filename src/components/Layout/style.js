@@ -14,7 +14,7 @@ export const Nav = styled.nav`
   z-index: 10;
   box-shadow: 0 1px 10px -5px #777;
 
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: 768px) {
     transition: 0.8s all ease;
     position: fixed;
     bottom: 0;
@@ -138,4 +138,12 @@ text-align:center;
 @media screen and (max-width:768px){
     grid-template-rows: repeat(6,80px);
 }
+`
+
+export const SideBarItem = styled(NavLink)`
+color:white;
+text-transform: uppercase;
+font-weight: 900;
+font-size: 1.5rem;
+text-decoration:none;
 `
