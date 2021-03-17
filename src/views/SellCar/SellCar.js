@@ -9,6 +9,7 @@ import { useAuth } from "../../context/AuthContext.utils";
 
 const SellCar = () => {
   const {user} = useAuth()
+  console.log(user);
 
   const initialState = {
     brand: "",

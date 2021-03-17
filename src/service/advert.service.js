@@ -6,6 +6,10 @@ const advertApi = axios.create({
   withCredentials: true,
 });
 
+export const likedAdvert = (advertId) => advertApi.post("/likedAdvert",advertId)
+
+export const unLikedAdvert = (advertId) => advertApi.post("/unLikedAdvert",advertId)
+
 export const getAdvert = (advertId) => advertApi.get(`/${advertId}`);
 
 export const createAdvert = (advert) => advertApi.post("/newAdvert",advert);
