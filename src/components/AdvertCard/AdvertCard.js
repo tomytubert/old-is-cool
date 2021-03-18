@@ -49,7 +49,7 @@ const AdvertCard = ({ props }) => {
             <Carousel>
               <div style={{ display: "flex" }}>
                 {props.image.map((item, idx) => (
-                  <div>
+                  <div key={item}>
                     <Link
                       to={`/coches-clasicos/${props.brand}-${props.model}-${props.year}/${props._id}`}
                     >

@@ -9,7 +9,7 @@ const AdvertList = () => {
     const { data } = await getAdverts();
     setState(data);
   };
-  console.log(state);
+  
   useEffect(() => {
     getAllAdverts();
   }, []);

@@ -14,7 +14,7 @@ const SideBar = ({ isOpen, handleToggle }) => {
   return (
     <SideBarContainer isOpen={isOpen} onClick={handleToggle}>
       <Icon>
-        <CloseIcon isOpen={isOpen}></CloseIcon>
+        <CloseIcon />
       </Icon>
       <SideBarWrapper>
         <SideBarMenu>
