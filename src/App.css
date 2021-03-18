@@ -62,13 +62,34 @@ h2 {
   box-shadow: 0px -1px 8px -6px #777;;
 }
 
-p {
+p, label {
   font-size: 20px;
 }
+label{
+  text-align: center;
+}
+
 
 .margin10{
     margin:10px
 }
 .padding10{
     padding: 10px;
+}
+
+.textAlignCenter{
+  text-align: center;
+}
+
+.width70vw{
+  width:70vw
+}
+
+input[type="file"] {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+  /* z-index: -1; */
 }
