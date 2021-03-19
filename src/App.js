@@ -45,7 +45,7 @@ function App() {
           <Login />
         </AnonRoute>
         <PrivateRoute exact path="/vender-mi-coche-clasico">
-          <SellCar />
+          <SellCar handleRenderNav={handleRenderNav} />
         </PrivateRoute>
       </Switch>
     </div>

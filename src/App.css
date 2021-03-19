@@ -6,6 +6,7 @@
 
 body {
   font-family: "Lato", sans-serif;
+  color:#3E4643
   /* font-family: 'Roboto Slab', serif; */
 }
 
@@ -17,6 +18,7 @@ h3 {
   font-size: 1.2rem;
   font-weight: 700;
   text-transform: uppercase;
+  color:#3E4643
 }
 
 h1 {
@@ -25,6 +27,7 @@ h1 {
   text-transform: uppercase;
   font-weight: 400;
   font-size: 50px;
+  color:#3E4643
 }
 
 h2 {
@@ -32,12 +35,14 @@ h2 {
   font-size: 4rem;
   font-weight: 700;
   text-transform: uppercase;
+  color:#3E4643
 }
 
 .advertTitle {
   font-size: 30px;
   font-weight: 600;
   text-transform: uppercase;
+  color:#3E4643
 }
 .advertPrice {
   font-size: 40px;
@@ -64,6 +69,7 @@ h2 {
 
 p, label {
   font-size: 20px;
+  color:#3E4643
 }
 label{
   text-align: center;
@@ -81,8 +87,15 @@ label{
   text-align: center;
 }
 
-.width70vw{
-  width:70vw
+.width90vw{
+  width:90vw;
+  border:none;
+}
+.css-yk16xz-control{
+  border:none !important;
+}
+.css-1okebmr-indicatorSeparator{
+  background-color: transparent !important;
 }
 
 input[type="file"] {
@@ -92,4 +105,66 @@ input[type="file"] {
 	overflow: hidden;
 	position: absolute;
   /* z-index: -1; */
+}
+input[type="number"], input[type="text"]{
+  border:none;
+  border-color: transparent;
+  font-size: 16px;
+}
+
+textarea{
+  font-size: 16px;
+  font-family: "Lato", sans-serif;
+  color:#3E4643;
+  border-color:lightgray;
+}
+
+.leftMargin18{
+  margin-left: 18px;
+}
+
+.lineBottom{
+  padding-bottom: 5px;
+  border-bottom: 1px solid lightgray;
+}
+
+.picker-panel {
+  position: absolute !important;
+  top: 32px !important;
+  left: 15% !important;
+  z-index: 5 !important;
+  width: 240px !important;
+  height: 220px !important;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%) !important;
+  border-radius: 4px !important;
+  background-color: white !important;
+  transition: all 0.3s !important;
+}
+
+.year-picker{
+  border-color: transparent !important;
+  width: 90vw !important;
+}
+
+.year-picker:hover {
+  color: #08a045 !important;
+  background-color: #fff;
+  border-color: #08a045 !important;
+}
+
+.selected-year {
+  background: #08a045 !important;
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+.footer-today {
+  display: inline-block;
+  text-align: center;
+  margin: 0;
+  color: #08a045 !important;
+  transition: color 0.3s ease;
+}
+.nav-button:hover {
+  color: #08a045 !important;
 }
