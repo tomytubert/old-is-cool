@@ -16,6 +16,8 @@ export const createAdvert = (advert) => advertApi.post("/newAdvert",advert);
 
 export const uploadFile = (file) => advertApi.post("/upload",file)
 
+export const findAdverts = (query) => advertApi.get(`/findAdverts?${query}`)
+
 export const getAdverts = () => advertApi.get("/getAll");
 
 export const deleteAdvert = (advertId) => advertApi.delete(`/${advertId}/delete`);

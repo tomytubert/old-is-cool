@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AdvertCard from "../../components/AdvertCard/AdvertCard";
-import { getAdverts } from "../../service/advert.service";
+import { getAdverts,findAdverts } from "../../service/advert.service";
 
 const AdvertList = () => {
   const [state, setState] = useState([]);
@@ -9,7 +9,14 @@ const AdvertList = () => {
     const { data } = await getAdverts();
     setState(data);
   };
-  
+
+
+  // const {brand,year,price,fromWhere} = filter
+
+  // const filterAdverts = async (brand,year,price,fromWhere) => {
+  //   await findAdverts(brand,year,price,fromWhere)
+  // }
+
   useEffect(() => {
     getAllAdverts();
   }, []);

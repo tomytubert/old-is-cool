@@ -22,18 +22,18 @@ h3 {
 }
 
 h1 {
-  font-size: 4rem;
   font-weight: 700;
   text-transform: uppercase;
   font-weight: 400;
-  font-size: 50px;
-  color:#3E4643
+  font-size: 30px;
+  color: white;
+  text-align: center;
 }
 
 h2 {
-  font-family: "Roboto Slab", serif;
-  font-size: 4rem;
-  font-weight: 700;
+  font-family: "Lato", serif;
+  font-size: 1.5rem;
+  font-weight: 600;
   text-transform: uppercase;
   color:#3E4643
 }
@@ -53,6 +53,9 @@ h2 {
 .flexColumn {
   display: flex;
   flex-direction: column;
+}
+.textAlignLeft{
+  text-align: left;
 }
 
 .borderBottomGreyTr {
@@ -140,7 +143,10 @@ textarea{
   background-color: white !important;
   transition: all 0.3s !important;
 }
-
+ .year-input{
+  font-size: 16px !important;
+  margin: 10px 10px 10px 0px !important;
+ }
 .year-picker{
   border-color: transparent !important;
   width: 90vw !important;
@@ -167,4 +173,25 @@ textarea{
 }
 .nav-button:hover {
   color: #08a045 !important;
+}
+
+.boxShadorHomePage{
+  box-shadow: 0 0 10px -7px #777;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.9);
+  padding: 15px;
+  position: relative;
+  top: -200px;
+}
+
+.homeBackground {
+  background-image: url("./img/Ford_Mustang_Fastback_1967_0000.jpg3769b377-86c9-45d1-82ca-c7e365a9163eOriginal.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100vh; */
 }

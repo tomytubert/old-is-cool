@@ -8,6 +8,7 @@ import {
   colors,
   typeOfTransmision,
   getAllAddress,
+  fromWhere
 } from "./data";
 import { CameraICon, PhotoInput, SmallPhotoIcon,SendBtn,OptionsBar } from "./style";
 import { IoIosArrowRoundBack } from "react-icons/io";
@@ -36,6 +37,7 @@ const SellCar = ({handleRenderNav}) => {
     otherInformation: "",
     price: 0,
     address: "",
+    fromWhere:"",
     // user: user.id
   };
 
@@ -250,6 +252,26 @@ const SellCar = ({handleRenderNav}) => {
             })}
           />
 
+          <label htmlFor="de donde viene" className="margin10 lineBottom">
+            ¿De donde es?
+          </label>
+          <Select
+            placeholder={fromWhere[0].value}
+            defaultValue={""}
+            options={fromWhere}
+            onChange={handleChange}
+            className="margin10 width70vw"
+            theme={(theme) => ({
+              ...theme,
+              colors: {
+                ...theme.colors,
+                primary75: "#54CC51",
+                primary: "#08a045",
+                primary50: "#BEF0BE",
+                primary25: "#D5F0DB",
+              },
+            })}
+          />
           <label htmlFor="brand-car" className="margin10 lineBottom">
             ¿Qué marca de coche es?
           </label>
@@ -339,7 +361,7 @@ const SellCar = ({handleRenderNav}) => {
             Modelo
           </label>
           <input
-            placeholder="Mustang Fashback*"
+            placeholder="Mustang Fastback*"
             type="text"
             name="model"
             onChange={handleChange}

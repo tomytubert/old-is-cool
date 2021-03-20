@@ -27,6 +27,25 @@ export const Carousel = styled.div`
     }
   }
 `;
+export const CarouselHomePage = styled.div`
+  display: flex;
+  overflow: auto;
+  flex: none;
+  margin:20px 0;
+  flex-flow: row nowrap;
+  scroll-snap-type: x mandatory;
+  div {
+    text-align: center;
+    scroll-snap-align: center;
+    flex: none;
+    width: 30vw;
+  }
+  @media screen and (max-width: 768px) {
+    div {
+      width: 100vw;
+    }
+  }
+`;
 
 export const AdvertWrapPhoto = styled.div`
   display: flex;
@@ -54,6 +73,14 @@ export const AdvertPhotoModal = styled.img`
   height: auto;
   object-fit: cover;
 `;
+export const AdvertPhotoHomePage = styled.img`
+    width: 100vw;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 5%;
+    box-shadow: 0 0 10px -5px #777;
+    margin-top: 5px;
+`
 
 export const ChatBtn = styled.div`
   background: white;

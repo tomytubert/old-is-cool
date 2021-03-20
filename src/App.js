@@ -15,6 +15,7 @@ import SideBar from "./components/Layout/SideBar";
 function App() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [renderNav, setRenderNav] = React.useState(true);
+  
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -30,12 +31,17 @@ function App() {
         </>
       )}
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" >
+        <HomePage/>
+        </Route>
         <Route
           exact
           path="/coches-clasicos/:model/:advertId"
         >
           <AdvertDetail handleRenderNav={handleRenderNav} />
+        </Route>
+        <Route exact path="/coches-clasicos/:query">
+          <AdvertList />
         </Route>
         <Route exact path="/coches-clasicos" component={AdvertList} />
         <AnonRoute exact path="/signup">
