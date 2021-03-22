@@ -199,7 +199,10 @@ const HomePage = () => {
             style={{
               position: " relative",
               top: "-80px",
-              paddingBottom:"50px"
+              paddingBottom: "50px",
+              boxShadow: "0 0 10px -6px #777",
+              borderRadius: "20px",
+              margin: "10px",
             }}
           >
             <h2 className="textAlignCenter lineBottom">
