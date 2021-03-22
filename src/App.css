@@ -6,7 +6,7 @@
 
 body {
   font-family: "Lato", sans-serif;
-  color:#3E4643
+  color: #3e4643;
   /* font-family: 'Roboto Slab', serif; */
 }
 
@@ -18,7 +18,7 @@ h3 {
   font-size: 1.2rem;
   font-weight: 700;
   text-transform: uppercase;
-  color:#3E4643
+  color: #3e4643;
 }
 
 h1 {
@@ -35,14 +35,14 @@ h2 {
   font-size: 1.5rem;
   font-weight: 600;
   text-transform: uppercase;
-  color:#3E4643
+  color: #3e4643;
 }
 
 .advertTitle {
   font-size: 30px;
   font-weight: 600;
   text-transform: uppercase;
-  color:#3E4643
+  color: #3e4643;
 }
 .advertPrice {
   font-size: 40px;
@@ -54,7 +54,8 @@ h2 {
   display: flex;
   flex-direction: column;
 }
-.textAlignLeft{
+
+.textAlignLeft {
   text-align: left;
 }
 
@@ -67,66 +68,68 @@ h2 {
 
 .boxShadow {
   border-radius: 20px;
-  box-shadow: 0px -1px 8px -6px #777;;
+  box-shadow: 0px -1px 8px -6px #777;
 }
 
-p, label {
+p,
+label {
   font-size: 20px;
-  color:#3E4643
+  color: #3e4643;
 }
-label{
+label {
   text-align: center;
 }
 
-
-.margin10{
-    margin:10px
+.margin10 {
+  margin: 10px;
 }
-.padding10{
-    padding: 10px;
+.padding10 {
+  padding: 10px;
 }
 
-.textAlignCenter{
+.textAlignCenter {
   text-align: center;
 }
 
-.width90vw{
-  width:90vw;
-  border:none;
+.width90vw {
+  width: 90vw;
+  border: none;
 }
-.css-yk16xz-control{
-  border:none !important;
+.css-yk16xz-control {
+  border: none !important;
 }
-.css-1okebmr-indicatorSeparator{
+.css-1okebmr-indicatorSeparator {
   background-color: transparent !important;
 }
 
 input[type="file"] {
   width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
   /* z-index: -1; */
 }
-input[type="number"], input[type="text"]{
-  border:none;
+input[type="number"],
+input[type="text"],
+input[type="password"] {
+  border: none;
   border-color: transparent;
   font-size: 16px;
 }
 
-textarea{
+textarea {
   font-size: 16px;
   font-family: "Lato", sans-serif;
-  color:#3E4643;
-  border-color:lightgray;
+  color: #3e4643;
+  border-color: lightgray;
 }
 
-.leftMargin18{
+.leftMargin18 {
   margin-left: 18px;
 }
 
-.lineBottom{
+.lineBottom {
   padding-bottom: 5px;
   border-bottom: 1px solid lightgray;
 }
@@ -143,11 +146,11 @@ textarea{
   background-color: white !important;
   transition: all 0.3s !important;
 }
- .year-input{
+.year-input {
   font-size: 16px !important;
   margin: 10px 10px 10px 0px !important;
- }
-.year-picker{
+}
+.year-picker {
   border-color: transparent !important;
   width: 90vw !important;
 }
@@ -175,10 +178,10 @@ textarea{
   color: #08a045 !important;
 }
 
-.boxShadorHomePage{
+.boxShadorHomePage {
   box-shadow: 0 0 10px -7px #777;
   border-radius: 20px;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.9);
   padding: 15px;
   position: relative;
   top: -200px;
@@ -189,9 +192,30 @@ textarea{
   background-repeat: no-repeat;
   background-size: cover;
   height: 500px;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  height: 100vh; */
+}
+.authBackground {
+  background-image: url("./img/beetles.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: -200px;
+}
+
+.inputBackgroundGrey {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  height: 40px;
+}
+
+.authTitles {
+  text-align: start;
+  font-size: 55px;
+  padding: 10px;
+  font-weight: 900;
+  padding-top: 60px;
+  letter-spacing: 2px;
+  line-height: 70px;
+}
+
+.titlesShadow {
+  text-shadow: 1px 2px 3px rgb(0 0 0 / 30%);
 }

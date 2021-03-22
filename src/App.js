@@ -11,6 +11,7 @@ import SellCar from "./views/SellCar/SellCar";
 import { Switch, Route, useParams } from "react-router-dom";
 import AdvertList from "./views/AdvertList/AdvertList";
 import SideBar from "./components/Layout/SideBar";
+import Profile from "./views/Profile/Profile";
 
 function App() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -45,13 +46,16 @@ function App() {
         </Route>
         <Route exact path="/coches-clasicos" component={AdvertList} />
         <AnonRoute exact path="/signup">
-          <SingUp />
+          <SingUp handleRenderNav={handleRenderNav} />
         </AnonRoute>
         <AnonRoute exact path="/login">
-          <Login />
+          <Login handleRenderNav={handleRenderNav} />
         </AnonRoute>
         <PrivateRoute exact path="/vender-mi-coche-clasico">
           <SellCar handleRenderNav={handleRenderNav} />
+        </PrivateRoute>
+        <PrivateRoute exact path="/profile/:userId">
+          <Profile handleRenderNav={handleRenderNav} />
         </PrivateRoute>
       </Switch>
     </div>

@@ -27,10 +27,11 @@ import { useHistory } from "react-router-dom";
 const SellCar = ({ handleRenderNav }) => {
   const { user } = useAuth();
   const history = useHistory();
-  console.log(user);
+
 
   const initialState = {
     brand: "",
+    user: user.id,
     typeOfCar: "",
     year: "",
     fuel: "",

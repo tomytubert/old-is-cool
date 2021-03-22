@@ -19,7 +19,7 @@ import {
 import { getAdverts, findAdverts } from "../../service/advert.service";
 import { FindBtn, Btn } from "./style";
 import qs from "qs";
-
+import Loading from "../../components/Loading/Loading";
 import { getBrands } from "../../service/brand.service";
 import Select from "react-select";
 import YearPicker from "react-year-picker";
@@ -112,18 +112,6 @@ const HomePage = () => {
               </Link>
             </div>
           </section>
-          <section>
-            <div
-              style={{
-                position: " relative",
-                top: "360px",
-                textAlign: "center",
-              }}
-            >
-              <h3>Tenemos {howMany} coches a la venta esperandote </h3>
-              <BiCar size={50} />
-            </div>
-          </section>
           <section className="boxShadorHomePage margin10">
             <form onSubmit={handleSubmit} className="flexColumn">
               <label
@@ -198,11 +186,7 @@ const HomePage = () => {
           <section
             style={{
               position: " relative",
-              top: "-80px",
-              paddingBottom: "50px",
-              boxShadow: "0 0 10px -6px #777",
-              borderRadius: "20px",
-              margin: "10px",
+              top: "-130px",
             }}
           >
             <h2 className="textAlignCenter lineBottom">
@@ -277,7 +261,7 @@ const HomePage = () => {
           </section>
         </main>
       ) : (
-        <p>Loading</p>
+        <Loading />
       )}
     </>
   );

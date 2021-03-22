@@ -10,6 +10,7 @@ import { useAuth } from "../../context/AuthContext.utils";
 
 const Navbar = ({handleToggle}) => {
   const { user } = useAuth();
+  console.log(user.id);
   return (
     <Nav>
       <NavBarContainer>
@@ -20,7 +21,7 @@ const Navbar = ({handleToggle}) => {
         <MobileIcon to="/vender-mi-coche-clasico">
           <AiOutlinePlusCircle />
         </MobileIcon>
-        <MobileIcon to="/userID">
+        <MobileIcon to={`/profile/${user.id}`}>
           <FiUser />
         </MobileIcon>
         <MobileIcon1 onClick={handleToggle}>
