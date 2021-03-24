@@ -20,8 +20,11 @@ function App() {
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
-  const handleRenderNav = () => {
-    setRenderNav(prev => !prev);
+  const handleRenderNavNone = () => {
+    setRenderNav(false);
+  };
+  const handleRenderNavYes = () => {
+    setRenderNav(true);
   };
   return (
     <div className="App">
@@ -33,29 +36,28 @@ function App() {
       )}
       <Switch>
         <Route exact path="/" >
-        <HomePage/>
+        <HomePage handleRenderNavYes={handleRenderNavYes} />
         </Route>
-        <Route
-          exact
-          path="/coches-clasicos/:model/:advertId"
-        >
-          <AdvertDetail handleRenderNav={handleRenderNav} />
+        <Route exact path="/coches-clasicos/:model/:advertId">
+          <AdvertDetail handleRenderNavNone={handleRenderNavNone} />
         </Route>
         <Route exact path="/coches-clasicos/:query">
-          <AdvertList />
+          <AdvertList handleRenderNavYes={handleRenderNavYes}  />
         </Route>
-        <Route exact path="/coches-clasicos" component={AdvertList} />
+        <Route exact path="/coches-clasicos">
+          <AdvertList  handleRenderNavYes={handleRenderNavYes}  />
+        </Route>
         <AnonRoute exact path="/signup">
-          <SingUp handleRenderNav={handleRenderNav} />
+          <SingUp handleRenderNavNone={handleRenderNavNone} />
         </AnonRoute>
         <AnonRoute exact path="/login">
-          <Login handleRenderNav={handleRenderNav} />
+          <Login handleRenderNavNone={handleRenderNavNone} />
         </AnonRoute>
         <PrivateRoute exact path="/vender-mi-coche-clasico">
-          <SellCar handleRenderNav={handleRenderNav} />
+          <SellCar handleRenderNavNone={handleRenderNavNone} />
         </PrivateRoute>
         <PrivateRoute exact path="/profile/:userId">
-          <Profile handleRenderNav={handleRenderNav} />
+          <Profile handleRenderNavNone={handleRenderNavNone} />
         </PrivateRoute>
       </Switch>
     </div>

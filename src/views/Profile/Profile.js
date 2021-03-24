@@ -23,7 +23,7 @@ import {
 import AdvertCard from "../../components/AdvertCard/AdvertCard";
 import { uploadFile } from "../../service/advert.service";
 import { update } from "../../service/auth.service";
-const Profile = ({ handleRenderNav }) => {
+const Profile = ({ handleRenderNavNone }) => {
   // const { user } = useAuth();
   const history = useHistory();
   const initialState = {
@@ -77,8 +77,7 @@ const Profile = ({ handleRenderNav }) => {
   };
 
   const goBack = () => {
-    handleRenderNav();
-    history.push("/coches-clasicos");
+    history.goBack()
   };
 
   const handleUpload = async (e) => {
@@ -108,8 +107,9 @@ const Profile = ({ handleRenderNav }) => {
   };
 
   useEffect(() => {
+    handleRenderNavNone();
     getProfileInfo();
-    handleRenderNav();
+    
   }, []);
 
   return (

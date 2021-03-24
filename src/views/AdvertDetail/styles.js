@@ -83,23 +83,24 @@ export const AdvertPhotoHomePage = styled.img`
 `
 
 export const ChatBtn = styled.div`
-  background: white;
-  color: black;
-  box-shadow: 1px 6px 12px -5px #777;
-  cursor: pointer;
-  font-size: 1.5em;
-  margin: auto 25px;
-  padding: 20px 50px;
-  border: 0;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-  border-radius: 40px;
-  width: 60%;
-  position: fixed;
-  z-index: 10;
-  top: auto;
-  text-align: center;
-  bottom: 15px;
+    background: white;
+    color: black;
+    box-shadow: 1px 6px 12px -5px #777;
+    cursor: pointer;
+    font-size: 1.5em;
+    margin: auto 25px;
+    padding: 20px 50px;
+    border: 0;
+    /* -webkit-transition: all 0.5s;
+    -webkit-transition: all 0.5s; */
+    transition: all 0.5s;
+    border-radius: 40px;
+    /* width: 60%; */
+    position: sticky;
+    z-index: 10;
+    top: auto;
+    text-align: center;
+    bottom: 15px;
   &:hover {
     background: white;
     transition: all 0.5s;

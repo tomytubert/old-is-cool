@@ -17,7 +17,7 @@ import { getBrands } from "../../service/brand.service";
 import Select from "react-select";
 import YearPicker from "react-year-picker";
 
-const HomePage = () => {
+const HomePage = ({handleRenderNavYes}) => {
   const initialState = {
     brand: "",
     year: "",
@@ -74,6 +74,7 @@ const HomePage = () => {
   };
 
   useEffect(() => {
+    handleRenderNavYes()
     getAllAdverts();
     getAllBrands();
   }, []);

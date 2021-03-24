@@ -24,7 +24,7 @@ import YearPicker from "react-year-picker";
 import { useAuth } from "../../context/AuthContext.utils";
 import { useHistory } from "react-router-dom";
 
-const SellCar = ({ handleRenderNav }) => {
+const SellCar = ({ handleRenderNavNone }) => {
   const { user } = useAuth();
   const history = useHistory();
 
@@ -105,7 +105,7 @@ const SellCar = ({ handleRenderNav }) => {
 
   useEffect(() => {
     getAllBrands();
-    handleRenderNav();
+    handleRenderNavNone();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -115,8 +115,7 @@ const SellCar = ({ handleRenderNav }) => {
     goBack();
   };
   const goBack = () => {
-    handleRenderNav();
-    history.push("/coches-clasicos");
+    history.goBack()
   };
 
   return (

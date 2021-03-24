@@ -30,7 +30,7 @@ import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import { GrManual } from "react-icons/gr";
 import { BsGear } from "react-icons/bs";
 
-const AdvertDetail = ({ handleRenderNav }) => {
+const AdvertDetail = ({ handleRenderNavNone }) => {
   const { advertId } = useParams();
   const history = useHistory();
   const [state, setState] = useState({});
@@ -56,21 +56,20 @@ const AdvertDetail = ({ handleRenderNav }) => {
   };
 
   const goBack = () => {
-    handleRenderNav();
     history.push("/coches-clasicos");
   };
 
   useEffect(() => {
     getAdvertLoQueSea();
-    handleRenderNav();
+    handleRenderNavNone();
   }, []);
 
   return (
     <>
       {loading ? (
-        <div>
+        <>
           <OptionsBar
-            style={{ display: "flex", justifyContent: "space-between" }}
+            style={{ display: "flex", justifyContent: "space-between",position:"sticky" }}
           >
             <IoIosArrowRoundBack
               size={50}
@@ -89,7 +88,7 @@ const AdvertDetail = ({ handleRenderNav }) => {
               )}
             </span>
           </OptionsBar>
-          <section style={{ position: "relative", top: "-100px" }}>
+          <section style={{ position: "relative", top: "-5px" }}>
             <AdvertWrapPhoto>
               <Holster>
                 <Carousel>
@@ -121,7 +120,7 @@ const AdvertDetail = ({ handleRenderNav }) => {
                     </DataIcon>
                     <DataIcon>
                       <IoSpeedometerOutline size={40} />
-                      <p>{state.km}</p>
+                      <p>{state.km}km</p>
                     </DataIcon>
                     <DataIcon>
                       <IoLocationOutline size={40} />
@@ -133,7 +132,7 @@ const AdvertDetail = ({ handleRenderNav }) => {
                     </DataIcon>
                     <DataIcon>
                       <BsGear size={40} />
-                      <p>{state.horsePower}</p>
+                      <p>{state.horsePower}cv</p>
                     </DataIcon>
                     <DataIcon>
                       <IoColorFillOutline size={40} />
@@ -152,7 +151,12 @@ const AdvertDetail = ({ handleRenderNav }) => {
                 Más información
               </h3>
               <div className="boxShadow margin10">
-                <p className="padding10">{state.otherInformation}</p>
+                <p
+                  className="padding10"
+                  style={{ wordWrap: "wrap", wordBreak: "break-all" }}
+                >
+                  {state.otherInformation}
+                </p>
               </div>
             </div>
             <div>
@@ -166,7 +170,7 @@ const AdvertDetail = ({ handleRenderNav }) => {
             {showModal && <Modal img={state.image} openModal={openModal} />}
             <ChatBtn>Contactar</ChatBtn>
           </section>
-        </div>
+        </>
       ) : (
         <Loading />
       )}

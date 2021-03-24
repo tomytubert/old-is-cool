@@ -7,7 +7,7 @@ import { Btn } from "../HomePage/style";
 import { BsArrowRightShort } from "react-icons/bs";
 import Loading from "../../components/Loading/Loading";
 
-const SingUp = ({ handleRenderNav }) => {
+const SingUp = ({ handleRenderNavNone }) => {
   const initialState = {
     email: "",
     password: "",
@@ -49,6 +49,7 @@ const SingUp = ({ handleRenderNav }) => {
 
   useEffect(() => {
     setTimeout(() => setLoading(true), 500);
+    handleRenderNavNone()
   }, []);
 
   return (

@@ -6,7 +6,7 @@ import { BsArrowRightShort } from "react-icons/bs";
 import { Btn } from "../HomePage/style";
 import Loading from "../../components/Loading/Loading";
 
-const Login = ({ handleRenderNav }) => {
+const Login = ({ handleRenderNavNone }) => {
   const initialState = {
     email: "",
     password: "",
@@ -43,7 +43,7 @@ const Login = ({ handleRenderNav }) => {
   };
 
   useEffect(() => {
-    handleRenderNav();
+    handleRenderNavNone();
     setTimeout(() => setLoading(true), 500);
   }, []);
 

@@ -43,6 +43,7 @@ h2 {
   font-weight: 600;
   text-transform: uppercase;
   color: #3e4643;
+  text-align: start;
 }
 .advertPrice {
   font-size: 40px;
