@@ -14,5 +14,6 @@ export const logout = () => authApi.post("/logout");
 
 export const getUser = () => authApi.get(`/`);
 
-export const update = (profile) => authApi.post("/update",profile)
-// export const getUser = (user) => authApi.get(`/${user.id}`,user);
+export const update = (profile) => authApi.post("/update",profile);
+
+export const sell = (advertId) => authApi.post(`/${advertId}/sell`);

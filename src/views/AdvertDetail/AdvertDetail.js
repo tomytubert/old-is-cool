@@ -5,6 +5,7 @@ import {
   likedAdvert,
   unLikedAdvert,
 } from "../../service/advert.service";
+import {sell} from "../../service/auth.service"
 import Loading from "../../components/Loading/Loading";
 import {
   Holster,
@@ -49,6 +50,11 @@ const AdvertDetail = ({ handleRenderNavNone }) => {
     setState(data);
     setLoading(true);
   };
+
+  const sellCar = async (advertId) => {
+      await sell(advertId)
+      history.push(`/profile/${user.id}`)
+  }
 
   const handleOnClick = async (advertId) => {
     if (like) {
@@ -187,7 +193,12 @@ const AdvertDetail = ({ handleRenderNavNone }) => {
               </div>
             </div>
             {showModal && <Modal img={state.image} openModal={openModal} />}
-            <ChatBtn>Contactar</ChatBtn>
+            {verifyAuth ? (
+              <ChatBtn onClick={()=>{sellCar(advertId)}}>Vendido</ChatBtn>
+            ) : (
+              <ChatBtn>Contactar</ChatBtn>
+            )}
+            
           </section>
         </>
       ) : (

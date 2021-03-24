@@ -52,6 +52,7 @@ const Profile = ({ handleRenderNavNone }) => {
 
   const getProfileInfo = async () => {
     const { data } = await getUser();
+    console.log("data",data);
     setProfile({
       ...profile,
       type: data.type,
@@ -59,7 +60,8 @@ const Profile = ({ handleRenderNavNone }) => {
       adverts: data.adverts,
       img: data.img,
       name: data.name,
-      address:data.address
+      address:data.address,
+      sells:data.sells.length
     });
     setProfileUpdate({
       ...profileUpdate,
