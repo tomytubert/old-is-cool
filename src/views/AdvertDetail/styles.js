@@ -168,14 +168,15 @@ left:85%;
 `
 
 export const OptionsBar = styled.nav`
-  background: transparent;
+  background: white;
   height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1rem;
-  position: sticky;
+  position: absolute;
   top: 0;
+  width:100vw;
   z-index: 10;
   box-shadow: 0 1px 10px -5px #777;
 `;

@@ -118,7 +118,7 @@ const SellCar = ({ handleRenderNav }) => {
     handleRenderNav();
     history.push("/coches-clasicos");
   };
-  console.log("images obj",images);
+
   return (
     <section>
       {loading ? (

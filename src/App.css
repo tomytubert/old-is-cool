@@ -112,7 +112,8 @@ input[type="file"] {
 }
 input[type="number"],
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {
   border: none;
   border-color: transparent;
   font-size: 16px;
@@ -218,4 +219,41 @@ textarea {
 
 .titlesShadow {
   text-shadow: 1px 2px 3px rgb(0 0 0 / 30%);
+}
+
+.infoBoxProfile{
+  display: flex;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 20px;
+  margin-top: 100px;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.boxShadowBottom{
+  box-shadow: 0px 15px 20px -1px rgb(0 0 0 / 10%);
+}
+
+.colorBoxProfile{
+  background-color: #0b6e4f;
+  width: 100vw;
+  height: 30vh;
+  position: fixed;
+  z-index: -10;
+  top: -5vh;
+  border-radius: 40px;
+}
+
+.ratingBoxProfile{
+  display: flex;
+    justify-content: space-evenly;
+    width: auto;
+    background-color: rgba(11,110,79,0.1);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.softGreenP{
+  color:rgba(62,70,67,0.6);
 }

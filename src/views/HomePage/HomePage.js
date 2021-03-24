@@ -8,14 +8,7 @@ import {
   AdvertWrapPhoto,
   AdvertPhotoHomePage,
 } from "../AdvertDetail/styles";
-import {
-  typeOfCar,
-  fuel,
-  colors,
-  typeOfTransmision,
-  getAllAddress,
-  fromWhere,
-} from "../SellCar/data";
+import {fromWhere} from "../SellCar/data";
 import { getAdverts, findAdverts } from "../../service/advert.service";
 import { FindBtn, Btn } from "./style";
 import qs from "qs";

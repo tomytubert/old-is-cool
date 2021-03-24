@@ -11,7 +11,8 @@ const SingUp = ({ handleRenderNav }) => {
   const initialState = {
     email: "",
     password: "",
-    tye: "",
+    type: "",
+    img: "/img/Profile-PNG-Icon.png"
   };
   const history = useHistory();
   const [state, unsafeSetState] = useState(initialState);

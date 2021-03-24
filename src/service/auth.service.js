@@ -12,4 +12,7 @@ export const signup = (user) => authApi.post("/signup", user);
 
 export const logout = () => authApi.post("/logout");
 
-export const getUser = (user) => authApi.get(`/${user.id}`,user);
+export const getUser = () => authApi.get(`/`);
+
+export const update = (profile) => authApi.post("/update",profile)
+// export const getUser = (user) => authApi.get(`/${user.id}`,user);

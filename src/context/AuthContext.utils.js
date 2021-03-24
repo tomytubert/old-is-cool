@@ -35,7 +35,7 @@ export function removeUser() {
   localStorage.removeItem("user");
 }
 
-export function useRefreshUser({ email, id }, onSuccess) {
+export function useRefreshUser({ email, id }, onSuccess) { //Como utilizar useRefreshUser
   const { isLogged } = getLocalUser();
   React.useEffect(() => {
     const hasMissingInfo = !email || !id;
