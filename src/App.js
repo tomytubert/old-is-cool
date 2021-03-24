@@ -56,6 +56,9 @@ function App() {
         <PrivateRoute exact path="/vender-mi-coche-clasico">
           <SellCar handleRenderNavNone={handleRenderNavNone} />
         </PrivateRoute>
+        <PrivateRoute exact path="/editar/:advertId">
+          <SellCar handleRenderNavNone={handleRenderNavNone} />
+        </PrivateRoute>
         <PrivateRoute exact path="/profile/:userId">
           <Profile handleRenderNavNone={handleRenderNavNone} />
         </PrivateRoute>

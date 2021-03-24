@@ -22,6 +22,6 @@ export const getAdverts = () => advertApi.get("/getAll");
 
 export const deleteAdvert = (advertId) => advertApi.delete(`/${advertId}/delete`);
 
-export const updateAdvert = (advertId) => advertApi.post(`/${advertId}/edit`)
+export const updateAdvertService = (advert) => advertApi.post(`/edit`,advert)
 
 

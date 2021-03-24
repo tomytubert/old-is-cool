@@ -26,11 +26,14 @@ import {
   IoSpeedometerOutline,
   IoWaterOutline,
 } from "react-icons/io5";
+import { FiEdit } from "react-icons/fi";
+import {getLocalUser} from "../../context/AuthContext.utils"
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import { GrManual } from "react-icons/gr";
 import { BsGear } from "react-icons/bs";
 
 const AdvertDetail = ({ handleRenderNavNone }) => {
+  const user = getLocalUser()
   const { advertId } = useParams();
   const history = useHistory();
   const [state, setState] = useState({});
@@ -46,6 +49,7 @@ const AdvertDetail = ({ handleRenderNavNone }) => {
     setState(data);
     setLoading(true);
   };
+
   const handleOnClick = async (advertId) => {
     if (like) {
       await unLikedAdvert(advertId);
@@ -54,9 +58,14 @@ const AdvertDetail = ({ handleRenderNavNone }) => {
     }
     setLike(!like);
   };
+  const verifyAuth = () => state.user._id === user.id ? true : false;
+  
+  const goEditRoute = () => {
+    history.push(`/editar/${advertId}`)
+  }
 
   const goBack = () => {
-    history.push("/coches-clasicos");
+    history.goBack()
   };
 
   useEffect(() => {
@@ -76,7 +85,15 @@ const AdvertDetail = ({ handleRenderNavNone }) => {
               style={{ marginLeft: "10px" }}
               onClick={goBack}
             />
-            <span
+
+            {verifyAuth ? (
+              <FiEdit
+                size={30}
+                style={{ marginRight: "10px" }}
+                onClick={goEditRoute}
+              />
+            ) : (
+                          <span
               onClick={() => {
                 handleOnClick(advertId);
               }}
@@ -87,6 +104,8 @@ const AdvertDetail = ({ handleRenderNavNone }) => {
                 <FcLikePlaceholder size={30} style={{ marginRight: "10px" }} />
               )}
             </span>
+            )}
+
           </OptionsBar>
           <section style={{ position: "relative", top: "-5px" }}>
             <AdvertWrapPhoto>
