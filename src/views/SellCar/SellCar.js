@@ -127,7 +127,9 @@ const SellCar = ({ handleRenderNavNone }) => {
       setUpdateView(true);
     }
     setUpdateAdvert(data);
-    setLoading(true);
+    if(updateAdvert._id){
+      setLoading(true)
+    }
   };
   console.log("update", updateAdvert);
 

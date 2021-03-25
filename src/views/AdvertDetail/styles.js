@@ -81,6 +81,14 @@ export const AdvertPhotoHomePage = styled.img`
     box-shadow: 0 0 10px -5px #777;
     margin-top: 5px;
 `
+export const PhotoInput = styled.div`
+  border: 0.5px solid lightgrey;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  margin: 10px;
+`
+
 
 export const ChatBtn = styled.div`
     background: white;
@@ -181,3 +189,41 @@ export const OptionsBar = styled.nav`
   z-index: 10;
   box-shadow: 0 1px 10px -5px #777;
 `;
+
+export const SoldOutModal = styled.aside`
+position:fixed;
+z-index:999;
+width:100%;
+height:100%;
+background:rgba(255,255,255,0.97);
+align-items:center;
+left:0;
+transition: 0.4s ease-in-out;
+opacity:${props => props.isOpen ? "100%" : "0"};
+top:${props => props.isOpen ? "0": "-100%"};
+`
+export const AcceptsSoldOut = styled.button`
+    background: #08a045;
+    color: white;
+    box-shadow: 0px 2px 12px -5px #777;
+    cursor: pointer;
+    font-size: 17px;
+    padding: 10px 20px;
+    border: 0;
+    transition: all 0.5s;
+    border-radius: 40px;
+    width: 300px;
+    text-transform: uppercase;
+`
+export const DeclineSoldOut = styled.button`
+    background: white;
+    color: red;
+    border: 1px solid red;
+    cursor: pointer;
+    font-size: 17px;
+    padding: 10px 20px;
+    transition: all 0.5s;
+    border-radius: 40px;
+    width: 300px;
+    text-transform: uppercase;
+`

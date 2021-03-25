@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { likedAdvert, unLikedAdvert } from "../../service/advert.service";
 import { getUser } from "../../service/auth.service";
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
+import { GiTakeMyMoney } from "react-icons/gi";
 import {
   Advert,
   AdvertInformation,
@@ -54,6 +55,9 @@ const AdvertCard = ({ props }) => {
                       to={`/coches-clasicos/${props.brand}-${props.model}-${props.year}/${props._id}`}
                     >
                       <AdvertPhoto alt="" src={item} />
+                      {props.soldOut && (
+                          <GiTakeMyMoney className="sellIconCard" size={30} />
+                        )}
                     </Link>
                   </div>
                 ))}

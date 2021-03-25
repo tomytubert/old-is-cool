@@ -12,6 +12,7 @@ import { Switch, Route, useParams } from "react-router-dom";
 import AdvertList from "./views/AdvertList/AdvertList";
 import SideBar from "./components/Layout/SideBar";
 import Profile from "./views/Profile/Profile";
+import Messages from "./views/Messages/Messages";
 
 function App() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -26,6 +27,7 @@ function App() {
   const handleRenderNavYes = () => {
     setRenderNav(true);
   };
+  console.log(renderNav);
   return (
     <div className="App">
       {renderNav && (
@@ -56,11 +58,14 @@ function App() {
         <PrivateRoute exact path="/vender-mi-coche-clasico">
           <SellCar handleRenderNavNone={handleRenderNavNone} />
         </PrivateRoute>
+        <PrivateRoute exact path="/mensajes/:userId">
+          <Messages handleRenderNavYes={handleRenderNavYes} />
+        </PrivateRoute>
         <PrivateRoute exact path="/editar/:advertId">
           <SellCar handleRenderNavNone={handleRenderNavNone} />
         </PrivateRoute>
         <PrivateRoute exact path="/profile/:userId">
-          <Profile handleRenderNavNone={handleRenderNavNone} />
+          <Profile handleRenderNavNone={handleRenderNavNone} handleRenderNavYes={handleRenderNavYes} />
         </PrivateRoute>
       </Switch>
     </div>

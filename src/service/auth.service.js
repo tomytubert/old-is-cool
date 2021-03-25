@@ -17,3 +17,5 @@ export const getUser = () => authApi.get(`/`);
 export const update = (profile) => authApi.post("/update",profile);
 
 export const sell = (advertId) => authApi.post(`/${advertId}/sell`);
+
+export const findUser = (userId) => authApi.get(`/${userId}`);

@@ -24,4 +24,6 @@ export const deleteAdvert = (advertId) => advertApi.delete(`/${advertId}/delete`
 
 export const updateAdvertService = (advert) => advertApi.post(`/edit`,advert)
 
+export const contactAdvert = (advertId) => advertApi.post("/contact",advertId)
+
 

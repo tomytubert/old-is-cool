@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { getUser } from "../../service/auth.service";
+import { useHistory, useParams, Link } from "react-router-dom";
+import { findUser } from "../../service/auth.service";
+import { PhotoInput } from "../AdvertDetail/styles";
+import { getPurchasesSeller } from "../../service/purchases.service";
 import {
   ProfilePhoto,
   CameraICon,
@@ -23,8 +25,11 @@ import {
 import AdvertCard from "../../components/AdvertCard/AdvertCard";
 import { uploadFile } from "../../service/advert.service";
 import { update } from "../../service/auth.service";
-const Profile = ({ handleRenderNavNone }) => {
+
+const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
   // const { user } = useAuth();
+  const { userId } = useParams();
+
   const history = useHistory();
   const initialState = {
     name: "",
@@ -43,16 +48,28 @@ const Profile = ({ handleRenderNavNone }) => {
     img: "",
     address: "",
   };
+  const [soldOut, setSoldOut] = useState(false);
   const [profile, setProfile] = useState(initialState);
   const [profileUpdate, setProfileUpdate] = useState(initialStateUpdate);
+  const [opinions, setOpinions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showAdverts, setShowAdverts] = useState(true);
+  const [showOpinions, setShowOpinions] = useState(false);
 
-  console.log("profile",profile);
+  const showContent = () => {
+    setShowAdverts(!showAdverts);
+    setShowOpinions(!showOpinions);
+  };
+
+  const getSellsInfo = async () => {
+    const { data } = await getPurchasesSeller(userId);
+    setOpinions(data);
+  };
 
   const getProfileInfo = async () => {
-    const { data } = await getUser();
-    console.log("data",data);
+    const { data } = await findUser(userId);
+    console.log("data", data);
     setProfile({
       ...profile,
       type: data.type,
@@ -60,17 +77,17 @@ const Profile = ({ handleRenderNavNone }) => {
       adverts: data.adverts,
       img: data.img,
       name: data.name,
-      address:data.address,
-      sells:data.sells.length
+      address: data.address,
+      sells: data.sells.length,
     });
     setProfileUpdate({
       ...profileUpdate,
       email: data.email,
       img: data.img,
       name: data.name,
-      address:data.address
+      address: data.address,
     });
-    setLoading(true)
+    setLoading(true);
   };
   const handleChangeUpdate = (e) => {
     if (e.target) {
@@ -79,7 +96,8 @@ const Profile = ({ handleRenderNavNone }) => {
   };
 
   const goBack = () => {
-    history.goBack()
+    history.goBack();
+    handleRenderNavYes();
   };
 
   const handleUpload = async (e) => {
@@ -111,7 +129,7 @@ const Profile = ({ handleRenderNavNone }) => {
   useEffect(() => {
     handleRenderNavNone();
     getProfileInfo();
-    
+    getSellsInfo();
   }, []);
 
   return (
@@ -174,26 +192,86 @@ const Profile = ({ handleRenderNavNone }) => {
               <div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <div>
-                    <BtnTab>Mis Anuncios</BtnTab>
+                    <BtnTab onClick={showContent}>Mis Anuncios</BtnTab>
                   </div>
                   <div>
-                    <BtnTab>Opiniones</BtnTab>
+                    <BtnTab onClick={showContent}>Opiniones</BtnTab>
                   </div>
                 </div>
               </div>
-              <AdvertWrapPhoto>
-                <Holster>
-                  <CarouselHomePage>
-                    <div style={{ display: "flex" }}>
-                      {profile.adverts.map((item, idx) => (
-                        <div key={item._id}>
-                          <AdvertCard props={item} />
+              {showAdverts && (
+                <AdvertWrapPhoto>
+                  <Holster>
+                    <CarouselHomePage>
+                      <div style={{ display: "flex" }}>
+                        {profile.adverts.map((item, idx) => (
+                          <div key={item._id}>
+                            <AdvertCard props={item} />
+                          </div>
+                        ))}
+                      </div>
+                    </CarouselHomePage>
+                  </Holster>
+                </AdvertWrapPhoto>
+              )}
+              {showOpinions && (
+                <>
+                  {opinions.map((opinion, idx) => (
+                    <div
+                      style={{
+                        display: "flex",
+                        padding: "15px",
+                        margin: "5px",
+                      }}
+                      className="boxShadow"
+                    >
+                      <div>
+                        <PhotoInput>
+                          {opinion.buyer.img ? (
+                            <img
+                              alt={opinion.buyer.img}
+                              src={opinion.buyer.img}
+                              style={{
+                                width: "60px",
+                                height: "60px",
+                                objectFit: "cover",
+                                borderRadius: "20%",
+                              }}
+                            />
+                          ) : (
+                            <CameraICon
+                              size={50}
+                              style={{ marginTop: "10%", marginLeft: "8%" }}
+                            />
+                          )}
+                        </PhotoInput>
+                      </div>
+                      <div className="flexColumn">
+                        <div>
+                          <p
+                            className="margin10"
+                          >
+                            {opinion.opinion}
+                          </p>
                         </div>
-                      ))}
+                        <Link
+                          to={`/profile/${opinion.buyer._id}`}
+                          style={{ textDecoration: "none" }}
+                        >
+                          <div>
+                            <p 
+                            className="margin10"
+                            style={{ fontSize: "17px", color: "grey" }}
+                            >
+                              Por {opinion.buyer.email}
+                            </p>
+                          </div>
+                        </Link>
+                      </div>
                     </div>
-                  </CarouselHomePage>
-                </Holster>
-              </AdvertWrapPhoto>
+                  ))}
+                </>
+              )}
             </div>
           </section>
           <EditContainer isOpen={isOpen}>
@@ -223,9 +301,7 @@ const Profile = ({ handleRenderNavNone }) => {
                 Nombre
               </label>
               <input
-                placeholder={
-                  profile.name ? profile.name : "Eduardo*"
-                }
+                placeholder={profile.name ? profile.name : "Eduardo*"}
                 type="text"
                 name="name"
                 onChange={handleChangeUpdate}
@@ -237,9 +313,7 @@ const Profile = ({ handleRenderNavNone }) => {
               </label>
               <input
                 placeholder={
-                  profile.address
-                    ? profile.address
-                    : "43820,Calafell*"
+                  profile.address ? profile.address : "43820,Calafell*"
                 }
                 type="text"
                 name="address"

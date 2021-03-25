@@ -12,7 +12,7 @@ const SingUp = ({ handleRenderNavNone }) => {
     email: "",
     password: "",
     type: "",
-    img: "/img/Profile-PNG-Icon.png"
+    img: ""
   };
   const history = useHistory();
   const [state, unsafeSetState] = useState(initialState);
