@@ -17,7 +17,7 @@ import { getBrands } from "../../service/brand.service";
 import Select from "react-select";
 import YearPicker from "react-year-picker";
 
-const HomePage = ({handleRenderNavYes}) => {
+const HomePage = ({handleRenderNavYes,setAdvertsQuery}) => {
   const initialState = {
     brand: "",
     year: "",
@@ -68,9 +68,9 @@ const HomePage = ({handleRenderNavYes}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const query = qs.stringify(filter);
-
-    const adverts = await findAdverts(query);
-    // history.push(`/coches-clasicos/${query}`)
+    const {data} = await findAdverts(query);
+    setAdvertsQuery(data)
+    history.push(`/coches-clasicos/${query}`)
   };
 
   useEffect(() => {

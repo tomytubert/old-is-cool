@@ -12,6 +12,7 @@ import {
   ProfilePhotoUpDate,
 } from "./style";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { RiHome2Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import { OptionsBar } from "../AdvertDetail/styles";
 import { CloseIcon, Icon } from "../../components/Layout/style";
@@ -79,6 +80,7 @@ const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
       name: data.name,
       address: data.address,
       sells: data.sells.length,
+      rating: data.rating
     });
     setProfileUpdate({
       ...profileUpdate,
@@ -94,6 +96,10 @@ const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
       setProfileUpdate({ ...profileUpdate, [e.target.name]: e.target.value });
     }
   };
+
+  const goHome = () => {
+    history.push("/")
+  }
 
   const goBack = () => {
     history.goBack();
@@ -144,12 +150,14 @@ const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
               style={{ marginLeft: "10px" }}
               onClick={goBack}
             />
-            <div>
+            <div style={{width:"100px",display:"flex",justifyContent:"space-between"}}>
+            <RiHome2Line size={35} onClick={()=>{goHome()}} />
               <FiEdit
                 size={30}
-                style={{ marginRight: "10px" }}
+                style={{ marginRight: "10px",marginTop:"2px" }}
                 onClick={handleToggle}
               />
+              
             </div>
           </OptionsBar>
           <section>

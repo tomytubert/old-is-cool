@@ -3,7 +3,7 @@ import AdvertCard from "../../components/AdvertCard/AdvertCard";
 import { getAdverts } from "../../service/advert.service";
 import Loading from "../../components/Loading/Loading";
 
-const AdvertList = ({ handleRenderNavYes }) => {
+const AdvertList = ({ handleRenderNavYes, adverts }) => {
   const [state, setState] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -15,7 +15,7 @@ const AdvertList = ({ handleRenderNavYes }) => {
   useEffect(() => {
     handleRenderNavYes();
     getAllAdverts();
-    setLoading(true)
+    setLoading(true);
   }, []);
 
   return (
@@ -29,10 +29,20 @@ const AdvertList = ({ handleRenderNavYes }) => {
             paddingBottom: "100px",
           }}
         >
-          {state.length > 1 &&
-            state.map((item, idx) => (
-              <AdvertCard key={item._id} props={item} />
-            ))}
+          {adverts[0] ? (
+            <>
+              {adverts.map((item, idx) => (
+                <AdvertCard key={item._id} props={item} />
+              ))}
+            </>
+          ) : (
+            <>
+              {state.length > 1 &&
+                state.map((item, idx) => (
+                  <AdvertCard key={item._id} props={item} />
+                ))}
+            </>
+          )}
         </div>
       ) : (
         <Loading />
