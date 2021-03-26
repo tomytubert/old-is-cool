@@ -19,14 +19,14 @@ const SideBar = ({ isOpen, handleToggle }) => {
       <SideBarWrapper>
         <SideBarMenu>
           {/* <SideBarItemWrapper> */}
-            <SideBarItem to="">Encuentra tu coche</SideBarItem>
-            <SideBarItem to="">Nuevo anuncio</SideBarItem>
+            <SideBarItem to="/coches-clasicos">Encuentra tu coche</SideBarItem>
+            <SideBarItem to="/vender-mi-coche-clasico">Nuevo anuncio</SideBarItem>
             {user.isLogged ? 
             <>
-            <SideBarItem to="">Favoritos</SideBarItem>
-            <SideBarItem to="">Tus Busquedas</SideBarItem>
+            {/* <SideBarItem to="">Favoritos</SideBarItem> */}
+            {/* <SideBarItem to="">Tus Busquedas</SideBarItem> */}
             <SideBarItem to={`/mensajes/${user.id}`}>Mensajes</SideBarItem>
-            <SideBarItem to="">Mis Anuncios</SideBarItem>
+            <SideBarItem to={`/profile/${user.id}`}>Mis Anuncios</SideBarItem>
             <SideBarItem to="/" onClick={handleLogout}>Log Out</SideBarItem>
             </>
             : <SideBarItem to="/login">Login</SideBarItem>}
