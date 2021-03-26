@@ -169,8 +169,7 @@ const SellCar = ({ handleRenderNavNone }) => {
           {updateWiew ? (
             <form
               onSubmit={handleSubmit}
-              className="flexColumn margin10"
-              style={{ paddingBottom: "100px" }}
+              className="flexColumn margin10 sellCar"
             >
               <div
                 style={{
@@ -457,8 +456,7 @@ const SellCar = ({ handleRenderNavNone }) => {
           ) : (
             <form
               onSubmit={handleSubmit}
-              className="flexColumn margin10"
-              style={{ paddingBottom: "100px" }}
+              className="flexColumn margin10 sellCar"
             >
               <div
                 style={{

@@ -28,7 +28,7 @@ function App() {
   const handleRenderNavYes = () => {
     setRenderNav(true);
   };
-  console.log(renderNav);
+
   return (
     <div className="App">
       {renderNav && (

@@ -53,11 +53,15 @@ export const BtnTab = styled.button`
     background-color: rgba(11,110,79,0.3);
     border-bottom: 1px solid #0b6e4f;
   }
+  @media (min-width: 768px){
+  padding:20px 40px;
+  font-size:20px;
+}
 `;
 
 export const EditContainer = styled.aside`
 position:fixed;
-z-index:999;
+z-index:${props => props.isOpen ? "999" : "0"};
 width:100%;
 height:100%;
 background:white;

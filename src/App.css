@@ -20,7 +20,11 @@ h3 {
   text-transform: uppercase;
   color: #3e4643;
 }
-
+@media (min-width: 768px) {
+  h3 {
+    font-size: 25px;
+  }
+}
 h1 {
   font-weight: 700;
   text-transform: uppercase;
@@ -92,7 +96,12 @@ label {
   text-align: center;
 }
 
+.maxWidth900 {
+  max-width: 900px;
+}
+
 .width90vw {
+  max-width: 900px;
   width: 90vw;
   border: none;
 }
@@ -149,12 +158,17 @@ textarea {
   transition: all 0.3s !important;
 }
 .year-input {
+  max-width: 900px !important;
   font-size: 16px !important;
   margin: 10px 10px 10px 0px !important;
+}
+.input-wrapper {
+  max-width: 900px !important;
 }
 .year-picker {
   border-color: transparent !important;
   width: 90vw !important;
+  max-width: 900px !important;
 }
 
 .year-picker:hover {
@@ -187,6 +201,11 @@ textarea {
   padding: 15px;
   position: relative;
   top: -200px;
+}
+@media (min-width: 768px) {
+  .boxShadorHomePage {
+    margin: 0 auto;
+  }
 }
 
 .homeBackground {
@@ -231,6 +250,18 @@ textarea {
   border-radius: 20px;
   background-color: white;
 }
+@media (min-width: 768px) {
+  .infoBoxProfile {
+    margin: 100px auto;
+    width: 400px;
+  }
+}
+@media (min-width: 768px) {
+  #profileTargetInfo {
+    width: 300px;
+    text-align: center;
+  }
+}
 
 .boxShadowBottom {
   box-shadow: 0px 15px 20px -1px rgb(0 0 0 / 10%);
@@ -255,8 +286,53 @@ textarea {
   padding: 10px;
 }
 
-.softGreenP {
-  color: rgba(62, 70, 67, 0.6);
+#formEditProfile {
+  margin: 40% 10px;
+}
+@media (min-width: 768px) {
+  #formEditProfile {
+    margin: 100px auto;
+    max-width: 900px;
+  }
+}
+
+#ProfilePhotoUpDateProfile {
+  padding: 0;
+  width: 100px;
+  height: 100px;
+}
+#divProfilePhotoUpDateProfile {
+  height: 130px;
+  width: 130px;
+  margin-left: 34%;
+}
+@media (min-width: 768px) {
+  #divProfilePhotoUpDateProfile {
+    margin-left: 44%;
+  }
+}
+
+.sellCar {
+  padding-bottom: 100px;
+}
+
+@media (min-width: 768px) {
+  .sellCar {
+    max-width: 900px;
+    margin: 10px auto;
+    box-shadow: 0 0 10px -8px grey;
+    border-radius: 20px;
+    padding: 20px;
+  }
+}
+@media (min-width: 768px) {
+  .softGreenP {
+    font-size: 20px;
+  }
+}
+
+.margin0Auto {
+  margin: 0 auto;
 }
 
 .sellIcon {
@@ -267,13 +343,104 @@ textarea {
   color: #3e4643;
   background-color: white;
   border-radius: 50%;
-  padding:7px;
+  padding: 7px;
+}
+@media (min-width: 768px) {
+  .sellIcon {
+    left: -120px;
+    top: auto;
+    width: 100px;
+    height: 100px;
+  }
+}
+#messageRow {
+  display: flex;
+  padding: 15px;
+  margin: 5px;
+  max-width: 600px;
+}
+@media (min-width: 768px) {
+  #messageRow {
+    margin: 0 auto;
+  }
 }
 
-.sellIconCard{
+#soldOutModalBox{
+  position: absolute;
+  top: 30%;
+  align-items: center;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  #soldOutModalBox {
+    left: 30vw;
+  }
+}
+
+#messageSoldOutRow {
+  display: flex;
+  padding: 15px;
+  margin: 5px;
+  align-items: center;
+  max-width: 600px;
+}
+@media (min-width: 768px) {
+  #messageSoldOutRow {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+#formSoldOut {
+  position: absolute;
+  top: 20%;
+  align-items: center;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  #formSoldOut {
+    left: 35vw;
+  }
+}
+#loginBox {
+  position: fixed;
+  bottom: 0px;
+  padding-bottom: 30px;
+  width: 100vw;
+  background-color: white;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+@media (min-width: 768px) {
+  #loginBox {
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 20px;
+    position: relative;
+  }
+}
+#submitBtnLogin {
+  width: 80px;
+  height: 80px;
+  position: fixed;
+  left: 70vw;
+  top: -40px;
+  z-index: 10;
+  color: rgb(8, 160, 69);
+}
+@media (min-width: 768px) {
+  #submitBtnLogin {
+    position: fixed;
+    left: 65vw;
+    top: 30vh;
+  }
+}
+
+.sellIconCard {
   position: relative;
-  top: -215px;
-  left: -50px;
+  top: -260px;
+  left: 120px;
   z-index: 1;
   color: #3e4643;
   background-color: white;
@@ -281,7 +448,7 @@ textarea {
   padding: 7px;
 }
 
-#photoModalSoldOut{
+#photoModalSoldOut {
   width: 150px;
   height: 150px;
   position: relative;

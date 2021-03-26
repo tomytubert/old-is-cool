@@ -78,7 +78,7 @@ const Messages = () => {
               {advert.contacts &&
                 advert.contacts.map((item, idx) => (
                   <div
-                    style={{ display: "flex", padding: "15px", margin: "5px" }}
+                    id="messageRow"
                     className="boxShadow"
                   >
                     <div>
@@ -125,7 +125,7 @@ const Messages = () => {
           {purchases.map((item, idx) => (
             <>
               <div
-                style={{ display: "flex", padding: "15px", margin: "5px" }}
+                id="messageRow"
                 className="boxShadow"
               >
                 <div>
@@ -180,12 +180,7 @@ const Messages = () => {
                 </Icon>
                 <div
                   className="boxShadow flexColumn margin10"
-                  style={{
-                    position: "absolute",
-                    top: "20%",
-                    alignItems: "center",
-                    textAlign: "center",
-                  }}
+                  id="formSoldOut"
                 >
                   <div>
                     <PhotoInput id="photoModalSoldOut">

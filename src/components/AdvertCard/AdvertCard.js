@@ -15,31 +15,48 @@ import {
   Carousel,
 } from "./styles";
 
-const AdvertCard = ({ props }) => {
-  const [like, setLike] = useState(false);
+const AdvertCard = ({ props, likedAdverts }) => {
+  const [likeToggle, setLikeToggle] = useState(false);
 
-  const handleOnClick = async (advertId) => {
-    if (like) {
-      await unLikedAdvert(advertId);
-    } else {
-      await likedAdvert(advertId);
-    }
-    setLike(!like);
+  const userLikedAdvert = async (advertId) => {
+    await likedAdvert(advertId);
+  };
+  const userUnLikedAdvert = async (advertId) => {
+    await unLikedAdvert(advertId);
   };
 
-  const likedAdvertData = async () => {
-    const { data } = await getUser();
-    data.likedAdverts.forEach((id) => {
-      if (id === props._id) {
-        setLike(true);
-      } else {
-        setLike(false);
-      }
-    });
+  const handleOnClick = (advertId) => {
+    if (likedAdverts) {
+      likedAdverts.forEach((like, idx) => {
+        if (like === advertId) {
+          console.log("son iguales");
+          userUnLikedAdvert(advertId);
+          setLikeToggle(false);
+        }
+
+        if (like !== advertId) {
+          console.log("son diferentes");
+          userLikedAdvert(advertId);
+          setLikeToggle(true);
+        }
+      });
+    }
+  };
+
+  const likedOrNot = (like, advertId) => {
+    if (like === advertId) {
+      setLikeToggle(true);
+    }
+  };
+
+  const toggleColorLike = (advertId) => {
+    if (likedAdverts) {
+      likedAdverts.map((item) => likedOrNot(item, advertId));
+    }
   };
 
   useEffect(() => {
-    likedAdvertData();
+    toggleColorLike(props._id);
   }, []);
 
   return (
@@ -56,8 +73,8 @@ const AdvertCard = ({ props }) => {
                     >
                       <AdvertPhoto alt="" src={item} />
                       {props.soldOut && (
-                          <GiTakeMyMoney className="sellIconCard" size={30} />
-                        )}
+                        <GiTakeMyMoney className="sellIconCard" size={30} />
+                      )}
                     </Link>
                   </div>
                 ))}
@@ -67,8 +84,8 @@ const AdvertCard = ({ props }) => {
         </AdvertWrapPhoto>
         <AdvertInformation>
           <AdvertTitle>
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <h3>
+            <div style={{ display: "flex", alignItems: "center",justifyContent:"space-between" }}>
+              <h3 style={{ maxWidth: " 200px" }}>
                 {props.brand} {props.model}
               </h3>
               <span
@@ -76,10 +93,10 @@ const AdvertCard = ({ props }) => {
                   handleOnClick(props._id);
                 }}
               >
-                {like ? (
-                  <FcLike size={30} style={{}} />
+                {likeToggle ? (
+                  <FcLike size={30} style={{margin:"0 15px"}} />
                 ) : (
-                  <FcLikePlaceholder size={30} style={{}} />
+                  <FcLikePlaceholder size={30} style={{margin:"0 15px"}} />
                 )}
               </span>
             </div>

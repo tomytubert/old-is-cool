@@ -106,8 +106,8 @@ const HomePage = ({handleRenderNavYes,setAdvertsQuery}) => {
               </Link>
             </div>
           </section>
-          <section className="boxShadorHomePage margin10">
-            <form onSubmit={handleSubmit} className="flexColumn">
+          <section className="boxShadorHomePage margin10 maxWidth900">
+            <form onSubmit={handleSubmit} className="flexColumn maxWidth900">
               <label
                 htmlFor="de donde viene"
                 className="margin10 textAlignLeft"
@@ -119,7 +119,7 @@ const HomePage = ({handleRenderNavYes,setAdvertsQuery}) => {
                 defaultValue={""}
                 options={fromWhere}
                 onChange={handleChange}
-                className="margin10 width70vw"
+                className="margin10 width70vw maxWidth900"
                 theme={(theme) => ({
                   ...theme,
                   colors: {
@@ -148,7 +148,7 @@ const HomePage = ({handleRenderNavYes,setAdvertsQuery}) => {
                 defaultValue={""}
                 options={brands}
                 onChange={handleChange}
-                className="margin10 width70vw"
+                className="margin10 width70vw maxWidth900"
                 theme={(theme) => ({
                   ...theme,
                   colors: {
@@ -170,11 +170,12 @@ const HomePage = ({handleRenderNavYes,setAdvertsQuery}) => {
                   name="price"
                   onChange={handleChange}
                   value={filter.price}
-                  className="margin10 width70vw leftMargin18"
+                  className="margin10 width70vw maxWidth900 leftMargin18"
                 />
               </div>
-
-              <FindBtn type="submit"> encuentra tu coche</FindBtn>
+              <div style={{display:"flex",justifyContent:"center"}}>
+                <FindBtn type="submit"> encuentra tu coche</FindBtn>
+              </div>
             </form>
           </section>
           <section
