@@ -17,6 +17,7 @@ import Messages from "./views/Messages/Messages";
 function App() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [renderNav, setRenderNav] = React.useState(true);
+  const [advertsQuery,setAdvertsQuery] = React.useState([])
   
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -27,7 +28,7 @@ function App() {
   const handleRenderNavYes = () => {
     setRenderNav(true);
   };
-  console.log(renderNav);
+
   return (
     <div className="App">
       {renderNav && (
@@ -38,13 +39,13 @@ function App() {
       )}
       <Switch>
         <Route exact path="/" >
-        <HomePage handleRenderNavYes={handleRenderNavYes} />
+        <HomePage handleRenderNavYes={handleRenderNavYes} setAdvertsQuery={setAdvertsQuery} />
         </Route>
         <Route exact path="/coches-clasicos/:model/:advertId">
           <AdvertDetail handleRenderNavNone={handleRenderNavNone} />
         </Route>
         <Route exact path="/coches-clasicos/:query">
-          <AdvertList handleRenderNavYes={handleRenderNavYes}  />
+          <AdvertList handleRenderNavYes={handleRenderNavYes} adverts={advertsQuery}  />
         </Route>
         <Route exact path="/coches-clasicos">
           <AdvertList  handleRenderNavYes={handleRenderNavYes}  />

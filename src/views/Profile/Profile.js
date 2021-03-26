@@ -3,6 +3,8 @@ import { useHistory, useParams, Link } from "react-router-dom";
 import { findUser } from "../../service/auth.service";
 import { PhotoInput } from "../AdvertDetail/styles";
 import { getPurchasesSeller } from "../../service/purchases.service";
+import { useAuth } from "../../context/AuthContext.utils";
+
 import {
   ProfilePhoto,
   CameraICon,
@@ -12,6 +14,7 @@ import {
   ProfilePhotoUpDate,
 } from "./style";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { RiHome2Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import { OptionsBar } from "../AdvertDetail/styles";
 import { CloseIcon, Icon } from "../../components/Layout/style";
@@ -25,9 +28,10 @@ import {
 import AdvertCard from "../../components/AdvertCard/AdvertCard";
 import { uploadFile } from "../../service/advert.service";
 import { update } from "../../service/auth.service";
+import { GiCrystalGrowth } from "react-icons/gi";
 
 const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
-  // const { user } = useAuth();
+   const { user } = useAuth();
   const { userId } = useParams();
 
   const history = useHistory();
@@ -69,7 +73,6 @@ const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
 
   const getProfileInfo = async () => {
     const { data } = await findUser(userId);
-    console.log("data", data);
     setProfile({
       ...profile,
       type: data.type,
@@ -79,6 +82,7 @@ const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
       name: data.name,
       address: data.address,
       sells: data.sells.length,
+      rating: data.rating,
     });
     setProfileUpdate({
       ...profileUpdate,
@@ -93,6 +97,10 @@ const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
     if (e.target) {
       setProfileUpdate({ ...profileUpdate, [e.target.name]: e.target.value });
     }
+  };
+
+  const goHome = () => {
+    history.push("/");
   };
 
   const goBack = () => {
@@ -130,7 +138,7 @@ const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
     handleRenderNavNone();
     getProfileInfo();
     getSellsInfo();
-  }, []);
+  }, [userId]);
 
   return (
     <>
@@ -144,17 +152,23 @@ const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
               style={{ marginLeft: "10px" }}
               onClick={goBack}
             />
-            <div>
+
+              <RiHome2Line
+                size={35}
+                onClick={() => {
+                  goHome();
+                }}
+              />
               <FiEdit
                 size={30}
-                style={{ marginRight: "10px" }}
+                style={{ marginRight: "10px", marginTop: "2px" }}
                 onClick={handleToggle}
               />
-            </div>
+            
           </OptionsBar>
           <section>
             <div className="colorBoxProfile" />
-            <div className="boxShadowBottom infoBoxProfile">
+            <div className="boxShadowBottom infoBoxProfile maxWidth900">
               <div style={{ height: "130px", width: "130px" }}>
                 <ProfilePhoto>
                   {profile.img ? (
@@ -164,10 +178,10 @@ const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
                   )}
                 </ProfilePhoto>
               </div>
-              <div className="flexColumn">
+              <div className="flexColumn" id="profileTargetInfo">
                 <h3>{profile.name ? profile.name : "Name"}</h3>
                 <p
-                  style={{ fontSize: "17px", padding: " 10px 0" }}
+                  style={{ padding: " 10px 0" }}
                   className="softGreenP"
                 >
                   {profile.type}
@@ -192,7 +206,12 @@ const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
               <div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <div>
-                    <BtnTab onClick={showContent}>Mis Anuncios</BtnTab>
+                  {userId !== user.id ?
+                  <BtnTab onClick={showContent}>Sus Anuncios</BtnTab>
+                  :
+                  <BtnTab onClick={showContent}>Mis Anuncios</BtnTab>
+                  }
+                    
                   </div>
                   <div>
                     <BtnTab onClick={showContent}>Opiniones</BtnTab>
@@ -215,7 +234,7 @@ const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
                 </AdvertWrapPhoto>
               )}
               {showOpinions && (
-                <>
+                <div className="maxWidth900 margin0Auto">
                   {opinions.map((opinion, idx) => (
                     <div
                       style={{
@@ -248,20 +267,16 @@ const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
                       </div>
                       <div className="flexColumn">
                         <div>
-                          <p
-                            className="margin10"
-                          >
-                            {opinion.opinion}
-                          </p>
+                          <p className="margin10">{opinion.opinion}</p>
                         </div>
                         <Link
                           to={`/profile/${opinion.buyer._id}`}
                           style={{ textDecoration: "none" }}
                         >
                           <div>
-                            <p 
-                            className="margin10"
-                            style={{ fontSize: "17px", color: "grey" }}
+                            <p
+                              className="margin10"
+                              style={{ fontSize: "17px", color: "grey" }}
                             >
                               Por {opinion.buyer.email}
                             </p>
@@ -270,7 +285,7 @@ const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
                       </div>
                     </div>
                   ))}
-                </>
+                </div>
               )}
             </div>
           </section>
@@ -281,16 +296,18 @@ const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
             <form
               onSubmit={handleSubmit}
               className="flexColumn"
-              style={{ margin: "40% 10px" }}
+              id="formEditProfile"
+              
             >
               <div
-                style={{ height: "130px", width: "130px", marginLeft: "34%" }}
+                id="divProfilePhotoUpDateProfile"
               >
                 <ProfilePhotoUpDate
-                  style={{ padding: "0", width: "100px", height: "100px" }}
+                  id="ProfilePhotoUpDateProfile"
+                  isOpen={isOpen}
                 >
                   {profileUpdate.img ? (
-                    <ProfilePhotoIcon src={profileUpdate.img} />
+                    <ProfilePhotoIcon isOpen={isOpen} src={profileUpdate.img} />
                   ) : (
                     <CameraICon style={{ marginTop: "25%" }} size={50} />
                   )}

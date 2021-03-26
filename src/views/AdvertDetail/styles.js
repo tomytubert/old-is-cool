@@ -1,4 +1,6 @@
+
 import styled from "styled-components";
+import { GiTakeMyMoney } from "react-icons/gi";
 import {FaTimes} from "react-icons/fa"
 // import { NavLink, Link } from "react-router-dom";
 
@@ -6,6 +8,10 @@ export const Holster = styled.div`
   display: flex;
   align-items: center;
   flex-flow: column nowrap;
+  @media (min-width: 768px){
+    flex-flow: row nowrap;
+    width:100%
+}
 `;
 
 export const Carousel = styled.div`
@@ -26,6 +32,13 @@ export const Carousel = styled.div`
       width: 100vw;
     }
   }
+  @media (min-width:768px){
+    height: 60vh;
+    width: 60vw;
+    div{
+      width:auto
+    }
+  }
 `;
 export const CarouselHomePage = styled.div`
   display: flex;
@@ -35,23 +48,34 @@ export const CarouselHomePage = styled.div`
   flex-flow: row nowrap;
   scroll-snap-type: x mandatory;
   div {
-    text-align: center;
+    text-align: start;
     scroll-snap-align: center;
     flex: none;
     width: 30vw;
   }
   @media screen and (max-width: 768px) {
     div {
-      width: 100vw;
+      width: 90vw;
     }
   }
+  @media (min-width:768px){
+    width: 100%;
+  }
 `;
+
+export const SoldOutIcon = styled(GiTakeMyMoney)`
+
+`
 
 export const AdvertWrapPhoto = styled.div`
   display: flex;
   flex-direction: row;
   margin: 0 auto;
   justify-content: center;
+  @media (min-width:768px){
+    height: 60vh;
+    width: 60vw;
+  }
 `;
 export const AdvertWrapPhotoModal = styled.div`
   display: flex;
@@ -67,6 +91,11 @@ export const AdvertPhoto = styled.img`
   object-fit: cover;
   border-bottom-left-radius: 5%;
   border-bottom-right-radius: 5%;
+  @media (min-width:768px){
+    height: 60vh;
+    width: 60vw;
+  }
+
 `;
 export const AdvertPhotoModal = styled.img`
   width: 100vw;
@@ -74,12 +103,16 @@ export const AdvertPhotoModal = styled.img`
   object-fit: cover;
 `;
 export const AdvertPhotoHomePage = styled.img`
-    width: 100vw;
+    width: 80vw;
     height: 280px;
     object-fit: cover;
     border-radius: 5%;
     box-shadow: 0 0 10px -5px #777;
     margin-top: 5px;
+    @media (min-width: 768px){
+    width:300px;
+    margin:20px 40px;
+}
 `
 export const PhotoInput = styled.div`
   border: 0.5px solid lightgrey;
@@ -119,6 +152,10 @@ export const ChatBtn = styled.div`
       transition: all 0.5s;
     }
   }
+  @media screen and (min-width: 768px) {
+    width:400px;
+    left:32%
+  }
 `;
 export const CarouselData = styled.div`
   display: flex;
@@ -138,6 +175,11 @@ export const CarouselData = styled.div`
       width: 100vw;
     }
   }
+  @media screen and (min-width: 768px) {
+    section {
+      width: auto;
+    }
+  }
 `;
 export const HolsterData = styled.div`
   display: flex;
@@ -145,6 +187,7 @@ export const HolsterData = styled.div`
   flex-flow: column nowrap;
   box-shadow: 1px 10px 20px -20px #777;
   margin: 15px 0;
+
 `;
 
 export const DataIcon = styled.div`

@@ -67,28 +67,12 @@ const SingUp = ({ handleRenderNavNone }) => {
           </div>
           <div
             className="boxShadow"
-            style={{
-              position: "fixed",
-              bottom: 0,
-              paddingBottom: "30px",
-              width: "100vw",
-              backgroundColor: "white",
-              borderBottomLeftRadius: 0,
-              borderBottomRightRadius: 0,
-            }}
+            id="loginBox"
           >
             <form onSubmit={handleSubmit} className="flexColumn margin10">
               <Btn
                 type="submit"
-                style={{
-                  width: "80px",
-                  height: "80px",
-                  position: "absolute",
-                  left: "70vw",
-                  top: "-40px",
-                  zIndex: 10,
-                  color: "#08a045",
-                }}
+                id="submitBtnLogin"
               >
                 <BsArrowRightShort size={40} />
               </Btn>

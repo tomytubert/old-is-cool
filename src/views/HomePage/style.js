@@ -14,6 +14,11 @@ export const FindBtn = styled.button`
     width: auto;
     text-transform: uppercase;
     margin-left: 10%;
+    max-width: 400px;
+    @media (min-width: 768px){
+    margin: 10px 0;
+    padding: 20px 40px;
+}
 `
 
 export const Btn = styled.button`
@@ -29,5 +34,8 @@ export const Btn = styled.button`
     border-radius: 40px;
     width: 300px;
     text-transform: uppercase;
-    /* margin-left: 10%; */
+    max-width: 400px;
+    @media (min-width: 768px){
+    
+    }
 `

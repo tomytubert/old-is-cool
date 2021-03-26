@@ -2,14 +2,15 @@ import styled from "styled-components";
 // import { NavLink, Link } from "react-router-dom";
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 
-
 export const Advert = styled.div`
   text-align: center;
-  /* position: absolute;
-  left: 50%;
-  transform: translate(-50%); */
   margin: 15px 0;
   flex: 0 1 50%;
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  align-items: center;
+  justify-content: center;
 `;
 export const AdvertWrapPhoto = styled.div`
   /* border-radius:15%; */
@@ -38,6 +39,7 @@ export const AdvertTitle = styled.div`
 export const AdvertOtherInformation = styled.div`
   color: grey;
   margin-right: 70px;
+  text-align: start;
 `;
 
 export const AdvertPhoto = styled.img`
@@ -46,7 +48,7 @@ export const AdvertPhoto = styled.img`
   object-fit: cover;
   border-radius: 10%;
   box-shadow: 1px 0 15px -5px #777;
-  svg{
+  svg {
     position: relative;
     top: 10px;
     left: 300px;
@@ -72,8 +74,9 @@ export const Carousel = styled.div`
     width: 30vw;
   }
   @media screen and (max-width: 768px) {
-    div{
-      width:100vw
+    div {
+      width: 90vw;
+      margin-bottom: -20px;
     }
   }
 `;

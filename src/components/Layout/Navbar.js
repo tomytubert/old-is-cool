@@ -10,7 +10,7 @@ import { useAuth } from "../../context/AuthContext.utils";
 
 const Navbar = ({handleToggle}) => {
   const { user } = useAuth();
-  console.log(user.id);
+
   return (
     <Nav>
       <NavBarContainer>
@@ -27,7 +27,7 @@ const Navbar = ({handleToggle}) => {
         <MobileIcon1 onClick={handleToggle}>
           <FaBars />
         </MobileIcon1>
-        {user.isLogged ? <SignedInLinks /> : <SignedOutLinks />}
+        {user.isLogged ? <SignedInLinks userId={user.id}/> : <SignedOutLinks />}
       </NavBarContainer>
     </Nav>
   );

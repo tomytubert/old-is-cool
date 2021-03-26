@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { VscDeviceCamera } from "react-icons/vsc";
-import {FaTimes} from "react-icons/fa"
+import { FaTimes } from "react-icons/fa";
 
 export const PhotoInput = styled.label`
   border: 0.5px solid lightgrey;
@@ -22,7 +22,7 @@ export const SmallPhotoIcon = styled.img`
 `;
 
 export const SendBtn = styled.button`
-  left:15%;
+  left: 15%;
   background: white;
   color: black;
   box-shadow: 1px 6px 12px -5px #777;
@@ -50,14 +50,17 @@ export const SendBtn = styled.button`
       transition: all 0.5s;
     }
   }
+  @media (min-width: 768px) {
+    left: auto;
+  }
 `;
 
 export const CloseIcon = styled(FaTimes)`
-color:white;
-position:relative;
-top:1%;
-left:85%;
-`
+  color: white;
+  position: relative;
+  top: 1%;
+  left: 85%;
+`;
 
 export const OptionsBar = styled.nav`
   background: white;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getUser } from "../../service/auth.service";
+import { getUser, updateRating } from "../../service/auth.service";
 import { getPurchases, updatePurchases } from "../../service/purchases.service";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { PhotoInput, SoldOutModal } from "../AdvertDetail/styles";
@@ -31,9 +31,13 @@ const Messages = () => {
     setOpinionModal(!opinionModal);
   };
 
-  const sendOpinion = async () => {
+  const sendOpinion = async (sellerId) => {
     const userOpinion = await updatePurchases(userId, opinion);
   };
+
+  const updateSellerRating = async (sellerId) => {
+    const userRating = await updateRating(sellerId,opinion.rating)
+  }
   const getUserData = async () => {
     const { data } = await getUser();
     setAdverts(data.adverts);
@@ -74,7 +78,7 @@ const Messages = () => {
               {advert.contacts &&
                 advert.contacts.map((item, idx) => (
                   <div
-                    style={{ display: "flex", padding: "15px", margin: "5px" }}
+                    id="messageRow"
                     className="boxShadow"
                   >
                     <div>
@@ -121,7 +125,7 @@ const Messages = () => {
           {purchases.map((item, idx) => (
             <>
               <div
-                style={{ display: "flex", padding: "15px", margin: "5px" }}
+                id="messageRow"
                 className="boxShadow"
               >
                 <div>
@@ -176,12 +180,7 @@ const Messages = () => {
                 </Icon>
                 <div
                   className="boxShadow flexColumn margin10"
-                  style={{
-                    position: "absolute",
-                    top: "20%",
-                    alignItems: "center",
-                    textAlign: "center",
-                  }}
+                  id="formSoldOut"
                 >
                   <div>
                     <PhotoInput id="photoModalSoldOut">
@@ -200,7 +199,9 @@ const Messages = () => {
                   </div>
                   <div style={{ marginTop: "-85px" }}>
                     <form
-                      onSubmit={handleSubmitOpinion}
+                      onSubmit={
+                        handleSubmitOpinion
+                      }
                       className="flexColumn margin10"
                     >
                       <label
@@ -233,7 +234,7 @@ const Messages = () => {
                         className="margin10 width70vw"
                       />
                       <div style={{ margin: "20px 0" }}>
-                        <Btn type="submit" className="margin10">
+                        <Btn type="submit" onClick={()=>{updateSellerRating(item.seller._id)}} className="margin10">
                           Valorar
                         </Btn>
                       </div>

@@ -4,6 +4,11 @@
     left: 40%;
     top: 40vh;
   }
+  @media (min-width: 768px) {
+    .lds-ellipsis {
+      left: 47%;
+    }
+  }
   .lds-ellipsis div {
     position: absolute;
     top: 33px;

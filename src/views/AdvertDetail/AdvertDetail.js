@@ -248,7 +248,7 @@ const AdvertDetail = ({ handleRenderNavNone }) => {
             {verifyAuth() ? (
               <>
                 {!soldOut && (
-                  <ChatBtn
+                  <ChatBtn 
                     onClick={() => {
                       handleToggle();
                     }}
@@ -262,7 +262,7 @@ const AdvertDetail = ({ handleRenderNavNone }) => {
                 {!soldOut && (
                   <>
                     {!contacted && (
-                      <ChatBtn
+                      <ChatBtn 
                         onClick={() => {
                           contactCar();
                         }}
@@ -287,12 +287,7 @@ const AdvertDetail = ({ handleRenderNavNone }) => {
             <div style={{ marginTop: "30%" }}>
               {state.contacts.map((contact, idx) => (
                 <div
-                  style={{
-                    display: "flex",
-                    padding: "15px",
-                    margin: "5px",
-                    alignItems: "center",
-                  }}
+                  id="messageSoldOutRow"
                   className="boxShadow"
                 >
                   <div>
@@ -344,12 +339,7 @@ const AdvertDetail = ({ handleRenderNavNone }) => {
                   <SoldOutModal isOpen={soldOutModal}>
                     <div
                       className="boxShadow flexColumn"
-                      style={{
-                        position: "absolute",
-                        top: "30%",
-                        alignItems: "center",
-                        textAlign: "center",
-                      }}
+                      id="soldOutModalBox"
                     >
                       <div>
                         <PhotoInput id="photoModalSoldOut">
