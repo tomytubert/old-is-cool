@@ -8,30 +8,64 @@ import AnonRoute from "./components/Routes/AnonRoute";
 import PrivateRoute from "./components/Routes/PrivateRoute";
 import AdvertDetail from "./views/AdvertDetail/AdvertDetail";
 import SellCar from "./views/SellCar/SellCar";
-import { Switch, Route } from "react-router-dom";
-import AdvertList from "./views/AdvertList/AdvertList"
+import { Switch, Route, useParams } from "react-router-dom";
+import AdvertList from "./views/AdvertList/AdvertList";
 import SideBar from "./components/Layout/SideBar";
+import Profile from "./views/Profile/Profile";
+import Messages from "./views/Messages/Messages";
+
 function App() {
-  const [isOpen, setIsOpen] = React.useState(false)
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [renderNav, setRenderNav] = React.useState(true);
+  
   const handleToggle = () => {
-    setIsOpen(!isOpen)
-  }
+    setIsOpen(!isOpen);
+  };
+  const handleRenderNavNone = () => {
+    setRenderNav(false);
+  };
+  const handleRenderNavYes = () => {
+    setRenderNav(true);
+  };
+  console.log(renderNav);
   return (
     <div className="App">
-      <Navbar handleToggle={handleToggle}/>
-      <SideBar isOpen={isOpen} handleToggle={handleToggle} />
+      {renderNav && (
+        <>
+          <Navbar handleToggle={handleToggle} />
+          <SideBar isOpen={isOpen} handleToggle={handleToggle} />
+        </>
+      )}
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/coches-clasicos/:model/:advertId" component={AdvertDetail} />
-        <Route exact path="/coches-clasicos" component={AdvertList} />
+        <Route exact path="/" >
+        <HomePage handleRenderNavYes={handleRenderNavYes} />
+        </Route>
+        <Route exact path="/coches-clasicos/:model/:advertId">
+          <AdvertDetail handleRenderNavNone={handleRenderNavNone} />
+        </Route>
+        <Route exact path="/coches-clasicos/:query">
+          <AdvertList handleRenderNavYes={handleRenderNavYes}  />
+        </Route>
+        <Route exact path="/coches-clasicos">
+          <AdvertList  handleRenderNavYes={handleRenderNavYes}  />
+        </Route>
         <AnonRoute exact path="/signup">
-          <SingUp />
+          <SingUp handleRenderNavNone={handleRenderNavNone} />
         </AnonRoute>
         <AnonRoute exact path="/login">
-          <Login />
+          <Login handleRenderNavNone={handleRenderNavNone} />
         </AnonRoute>
         <PrivateRoute exact path="/vender-mi-coche-clasico">
-          <SellCar />
+          <SellCar handleRenderNavNone={handleRenderNavNone} />
+        </PrivateRoute>
+        <PrivateRoute exact path="/mensajes/:userId">
+          <Messages handleRenderNavYes={handleRenderNavYes} />
+        </PrivateRoute>
+        <PrivateRoute exact path="/editar/:advertId">
+          <SellCar handleRenderNavNone={handleRenderNavNone} />
+        </PrivateRoute>
+        <PrivateRoute exact path="/profile/:userId">
+          <Profile handleRenderNavNone={handleRenderNavNone} handleRenderNavYes={handleRenderNavYes} />
         </PrivateRoute>
       </Switch>
     </div>

@@ -27,6 +27,23 @@ export const fuel = [
     name: "fuel",
   },
 ];
+export const fromWhere = [
+  {
+    value: "Europa",
+    label: "Europa",
+    name: "fromWhere",
+  },
+  {
+    value: "Asia",
+    label: "Asia",
+    name: "fromWhere",
+  },
+  {
+    value: "America",
+    label: "America",
+    name: "fromWhere",
+  },
+];
 export const typeOfTransmision = [
   {
     value: "Manual",

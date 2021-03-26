@@ -14,7 +14,7 @@ const SideBar = ({ isOpen, handleToggle }) => {
   return (
     <SideBarContainer isOpen={isOpen} onClick={handleToggle}>
       <Icon>
-        <CloseIcon isOpen={isOpen}></CloseIcon>
+        <CloseIcon />
       </Icon>
       <SideBarWrapper>
         <SideBarMenu>
@@ -25,7 +25,7 @@ const SideBar = ({ isOpen, handleToggle }) => {
             <>
             <SideBarItem to="">Favoritos</SideBarItem>
             <SideBarItem to="">Tus Busquedas</SideBarItem>
-            <SideBarItem to="">Mensajes</SideBarItem>
+            <SideBarItem to={`/mensajes/${user.id}`}>Mensajes</SideBarItem>
             <SideBarItem to="">Mis Anuncios</SideBarItem>
             <SideBarItem to="/" onClick={handleLogout}>Log Out</SideBarItem>
             </>

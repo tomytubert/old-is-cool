@@ -1,38 +1,291 @@
-.App {
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+body {
+  font-family: "Lato", sans-serif;
+  color: #3e4643;
+  /* font-family: 'Roboto Slab', serif; */
+}
+
+body :-webkit-scrollbar {
+  display: none;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #3e4643;
+}
+
+h1 {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 30px;
+  color: white;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h2 {
+  font-family: "Lato", serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #3e4643;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.advertTitle {
+  font-size: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #3e4643;
+  text-align: start;
+}
+.advertPrice {
+  font-size: 40px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.flexColumn {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.textAlignLeft {
+  text-align: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.borderBottomGreyTr {
+  border-bottom: 1px solid lightgrey;
+}
+.borderRightGreyTd {
+  border-right: 1px solid lightgrey;
+}
+
+.boxShadow {
+  border-radius: 20px;
+  box-shadow: 0px 0px 8px -4px #777;
+}
+
+p,
+label {
+  font-size: 20px;
+  color: #3e4643;
+}
+label {
+  text-align: center;
+}
+
+.margin10 {
+  margin: 10px;
+}
+.padding10 {
+  padding: 10px;
+}
+
+.textAlignCenter {
+  text-align: center;
+}
+
+.width90vw {
+  width: 90vw;
+  border: none;
+}
+.css-yk16xz-control {
+  border: none !important;
+}
+.css-1okebmr-indicatorSeparator {
+  background-color: transparent !important;
+}
+
+input[type="file"] {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  /* z-index: -1; */
+}
+input[type="number"],
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  border: none;
+  border-color: transparent;
+  font-size: 16px;
+}
+
+textarea {
+  font-size: 16px;
+  font-family: "Lato", sans-serif;
+  color: #3e4643;
+  border-color: lightgray;
+}
+
+.leftMargin18 {
+  margin-left: 18px;
+}
+
+.lineBottom {
+  padding-bottom: 5px;
+  border-bottom: 1px solid lightgray;
+}
+
+.picker-panel {
+  position: absolute !important;
+  top: 32px !important;
+  left: 15% !important;
+  z-index: 5 !important;
+  width: 240px !important;
+  height: 220px !important;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%) !important;
+  border-radius: 4px !important;
+  background-color: white !important;
+  transition: all 0.3s !important;
+}
+.year-input {
+  font-size: 16px !important;
+  margin: 10px 10px 10px 0px !important;
+}
+.year-picker {
+  border-color: transparent !important;
+  width: 90vw !important;
+}
+
+.year-picker:hover {
+  color: #08a045 !important;
+  background-color: #fff;
+  border-color: #08a045 !important;
+}
+
+.selected-year {
+  background: #08a045 !important;
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+.footer-today {
+  display: inline-block;
+  text-align: center;
+  margin: 0;
+  color: #08a045 !important;
+  transition: color 0.3s ease;
+}
+.nav-button:hover {
+  color: #08a045 !important;
+}
+
+.boxShadorHomePage {
+  box-shadow: 0 0 10px -7px #777;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  position: relative;
+  top: -200px;
+}
+
+.homeBackground {
+  background-image: url("./img/Ford_Mustang_Fastback_1967_0000.jpg3769b377-86c9-45d1-82ca-c7e365a9163eOriginal.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+}
+.authBackground {
+  background-image: url("./img/beetles.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: -200px;
+}
+
+.inputBackgroundGrey {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  height: 40px;
+}
+
+.authTitles {
+  text-align: start;
+  font-size: 55px;
+  padding: 10px;
+  font-weight: 900;
+  padding-top: 60px;
+  letter-spacing: 2px;
+  line-height: 70px;
+}
+
+.titlesShadow {
+  text-shadow: 1px 2px 3px rgb(0 0 0 / 30%);
+}
+
+.infoBoxProfile {
+  display: flex;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 20px;
+  margin-top: 100px;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.boxShadowBottom {
+  box-shadow: 0px 15px 20px -1px rgb(0 0 0 / 10%);
+}
+
+.colorBoxProfile {
+  background-color: #0b6e4f;
+  width: 100vw;
+  height: 30vh;
+  position: fixed;
+  z-index: -10;
+  top: -5vh;
+  border-radius: 40px;
+}
+
+.ratingBoxProfile {
+  display: flex;
+  justify-content: space-evenly;
+  width: auto;
+  background-color: rgba(11, 110, 79, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.softGreenP {
+  color: rgba(62, 70, 67, 0.6);
+}
+
+.sellIcon {
+  position: relative;
+  top: -390px;
+  left: 42vw;
+  z-index: 1;
+  color: #3e4643;
+  background-color: white;
+  border-radius: 50%;
+  padding:7px;
+}
+
+.sellIconCard{
+  position: relative;
+  top: -215px;
+  left: -50px;
+  z-index: 1;
+  color: #3e4643;
+  background-color: white;
+  border-radius: 50%;
+  padding: 7px;
+}
+
+#photoModalSoldOut{
+  width: 150px;
+  height: 150px;
+  position: relative;
+  top: -100px;
+  margin-bottom: 0;
+  background-color: white;
 }

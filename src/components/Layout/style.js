@@ -62,6 +62,19 @@ export const MobileIcon = styled(NavLink)`
   }
 `;
 
+export const MobileIcon1 = styled.div`
+  display: none;
+  @media screen and (max-width: 768px) {
+    ${"" /* Cuando sea mobile */}
+    display:block;
+    position: relative;
+    top: 30%;
+    font-size:2rem;
+    cursor: pointer;
+    color: black;
+  }
+`;
+
 export const NavMenu = styled.ul`
   display: flex;
   align-items: center;

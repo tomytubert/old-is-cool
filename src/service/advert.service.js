@@ -6,16 +6,24 @@ const advertApi = axios.create({
   withCredentials: true,
 });
 
+export const likedAdvert = (advertId) => advertApi.post("/likedAdvert",advertId)
+
+export const unLikedAdvert = (advertId) => advertApi.post("/unLikedAdvert",advertId)
+
 export const getAdvert = (advertId) => advertApi.get(`/${advertId}`);
 
 export const createAdvert = (advert) => advertApi.post("/newAdvert",advert);
 
 export const uploadFile = (file) => advertApi.post("/upload",file)
 
+export const findAdverts = (query) => advertApi.get(`/findAdverts?${query}`)
+
 export const getAdverts = () => advertApi.get("/getAll");
 
 export const deleteAdvert = (advertId) => advertApi.delete(`/${advertId}/delete`);
 
-export const updateAdvert = (advertId) => advertApi.post(`/${advertId}/edit`)
+export const updateAdvertService = (advert) => advertApi.post(`/edit`,advert)
+
+export const contactAdvert = (advertId) => advertApi.post("/contact",advertId)
 
 
