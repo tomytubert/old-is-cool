@@ -11,10 +11,9 @@ const AdvertList = ({ handleRenderNavYes, adverts }) => {
   const [loading, setLoading] = useState(false);
   const [likedAdverts,setLikedAdverts]=useState([])
   const { user } = useAuth();
- 
+
   const getAllAdverts = async () => {
     const { data } = await getAdverts();
-    
     setState(data);
     setLoading(true);
   };

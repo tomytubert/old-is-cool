@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link ,useHistory} from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { likedAdvert, unLikedAdvert } from "../../service/advert.service";
 import { getUser } from "../../service/auth.service";
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
@@ -15,32 +15,38 @@ import {
   Carousel,
 } from "./styles";
 
-const AdvertCard = ({ props, likedAdverts,userIsLogged }) => {
+const AdvertCard = ({ props, likedAdverts, userIsLogged }) => {
   const [likeToggle, setLikeToggle] = useState(false);
-  const history = useHistory()
+  const history = useHistory();
   const userLikedAdvert = async (advertId) => {
     await likedAdvert(advertId);
   };
   const userUnLikedAdvert = async (advertId) => {
     await unLikedAdvert(advertId);
   };
-
+  
   const handleOnClick = (advertId) => {
-
     if (likedAdverts && userIsLogged) {
+      if(likedAdverts.length === 0){
+        userLikedAdvert(advertId);
+        setLikeToggle(true);
+      }
       likedAdverts.forEach((like, idx) => {
         if (like === advertId) {
+          console.log("son iguales");
           userUnLikedAdvert(advertId);
           setLikeToggle(false);
         }
 
         if (like !== advertId) {
+          console.log("son diferentes");
           userLikedAdvert(advertId);
           setLikeToggle(true);
         }
       });
+    } else {
+      history.push("/login");
     }
-    history.push("/login")
   };
 
   const likedOrNot = (like, advertId) => {
@@ -84,7 +90,13 @@ const AdvertCard = ({ props, likedAdverts,userIsLogged }) => {
         </AdvertWrapPhoto>
         <AdvertInformation>
           <AdvertTitle>
-            <div style={{ display: "flex", alignItems: "center",justifyContent:"space-between" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
               <h3 style={{ maxWidth: " 200px" }}>
                 {props.brand} {props.model}
               </h3>
@@ -94,9 +106,9 @@ const AdvertCard = ({ props, likedAdverts,userIsLogged }) => {
                 }}
               >
                 {likeToggle ? (
-                  <FcLike size={30} style={{margin:"0 15px"}} />
+                  <FcLike size={30} style={{ margin: "0 15px" }} />
                 ) : (
-                  <FcLikePlaceholder size={30} style={{margin:"0 15px"}} />
+                  <FcLikePlaceholder size={30} style={{ margin: "0 15px" }} />
                 )}
               </span>
             </div>
