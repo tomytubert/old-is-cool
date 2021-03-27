@@ -33,13 +33,11 @@ const AdvertCard = ({ props, likedAdverts, userIsLogged }) => {
       }
       likedAdverts.forEach((like, idx) => {
         if (like === advertId) {
-          console.log("son iguales");
           userUnLikedAdvert(advertId);
           setLikeToggle(false);
         }
 
         if (like !== advertId) {
-          console.log("son diferentes");
           userLikedAdvert(advertId);
           setLikeToggle(true);
         }
