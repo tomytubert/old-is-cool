@@ -424,8 +424,8 @@ textarea {
   width: 80px;
   height: 80px;
   position: fixed;
-  left: 70vw;
-  top: -40px;
+  left: 75vw;
+  bottom: 300px;
   z-index: 10;
   color: rgb(8, 160, 69);
 }
@@ -434,6 +434,7 @@ textarea {
     position: fixed;
     left: 65vw;
     top: 30vh;
+    bottom: auto;
   }
 }
 

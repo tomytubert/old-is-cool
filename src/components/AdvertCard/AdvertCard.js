@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link ,useHistory} from "react-router-dom";
 import { likedAdvert, unLikedAdvert } from "../../service/advert.service";
 import { getUser } from "../../service/auth.service";
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
@@ -15,9 +15,9 @@ import {
   Carousel,
 } from "./styles";
 
-const AdvertCard = ({ props, likedAdverts }) => {
+const AdvertCard = ({ props, likedAdverts,userIsLogged }) => {
   const [likeToggle, setLikeToggle] = useState(false);
-
+  const history = useHistory()
   const userLikedAdvert = async (advertId) => {
     await likedAdvert(advertId);
   };
@@ -26,21 +26,21 @@ const AdvertCard = ({ props, likedAdverts }) => {
   };
 
   const handleOnClick = (advertId) => {
-    if (likedAdverts) {
+
+    if (likedAdverts && userIsLogged) {
       likedAdverts.forEach((like, idx) => {
         if (like === advertId) {
-          console.log("son iguales");
           userUnLikedAdvert(advertId);
           setLikeToggle(false);
         }
 
         if (like !== advertId) {
-          console.log("son diferentes");
           userLikedAdvert(advertId);
           setLikeToggle(true);
         }
       });
     }
+    history.push("/login")
   };
 
   const likedOrNot = (like, advertId) => {
