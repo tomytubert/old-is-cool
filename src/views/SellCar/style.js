@@ -10,7 +10,7 @@ export const PhotoInput = styled.label`
   margin: 10px;
 `;
 export const CameraICon = styled(VscDeviceCamera)`
-  color: lightgray;
+  color: ${props => props.badSubmit ? "red" : "lightgray"};
   margin-top: 20%;
 `;
 
@@ -74,3 +74,16 @@ export const OptionsBar = styled.nav`
   z-index: 10;
   box-shadow: 0 1px 10px -5px #777;
 `;
+
+export const ErrorModal = styled.aside`
+position:fixed;
+z-index:${props => props.isOpen ? "999" : "0"};
+width:100%;
+height:100%;
+background:rgba(9,9,9,0.3);
+align-items:center;
+left:0;
+transition: 0.4s ease-in-out;
+opacity:${props => props.isOpen ? "100%" : "0"};
+top:${props => props.isOpen ? "0": "-100%"};
+`

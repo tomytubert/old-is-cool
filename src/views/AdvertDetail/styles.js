@@ -109,6 +109,7 @@ export const AdvertPhotoHomePage = styled.img`
     border-radius: 5%;
     box-shadow: 0 0 10px -5px #777;
     margin-top: 5px;
+    margin-left: 20px;
     @media (min-width: 768px){
     width:300px;
     margin:20px 40px;

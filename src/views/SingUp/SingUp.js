@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSafeDispatch } from "../../hooks/useSafeDispatch";
 import { useAuth } from "../../context/AuthContext.utils";
 import { BtnType } from "./style";
@@ -14,7 +14,7 @@ const SingUp = ({ handleRenderNavNone }) => {
     type: "",
     img: ""
   };
-  const history = useHistory();
+  const { handleSignup } = useAuth();
   const [state, unsafeSetState] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -23,28 +23,16 @@ const SingUp = ({ handleRenderNavNone }) => {
 
   const handleChange = ({ target }) => {
     setState({ ...state, [target.name]: target.value });
-    verifyValidators(); //Don't work
   };
-
-  const verifyValidators = () => {
-    const emailRegex = new RegExp("/S+@S+.S+/");
-    console.log("Se inicia");
-    if (emailRegex.test(state.email)) {
-      console.log("hola");
-    }
-  };
-
-  const { handleSignup } = useAuth();
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newUser = await handleSignup(state);
-
+    
     if (newUser && newUser.message) {
       setError(newUser.message);
     }
     setState(initialState);
-    history.push("/");
   };
 
   useEffect(() => {
@@ -58,10 +46,10 @@ const SingUp = ({ handleRenderNavNone }) => {
         <section className="authBackground" style={{ height: "100vh" }}>
           <div>
             <h1 className="authTitles titlesShadow">
-              Encuentra{" "}
+              Encuentra
               <p className="authTitles" style={{ padding: "0" }}>
                 el coche
-              </p>{" "}
+              </p>
               de tus sueños
             </h1>
           </div>
@@ -72,7 +60,7 @@ const SingUp = ({ handleRenderNavNone }) => {
             <form onSubmit={handleSubmit} className="flexColumn margin10">
               <Btn
                 type="submit"
-                id="submitBtnLogin"
+                id="submitBtnSingUp"
               >
                 <BsArrowRightShort size={40} />
               </Btn>

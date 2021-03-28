@@ -15,30 +15,19 @@ const Login = ({ handleRenderNavNone }) => {
   const [state, unsafeSetState] = useState(initialState);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  // const [passwordValidator, setPasswordValidator] = useState(false)
   const setState = useSafeDispatch(unsafeSetState);
 
-  const verifyValidators = () => {
-    const EMAIL_REGEX = new RegExp("/S+@S+.S+/");
-    if (state.email === EMAIL_REGEX) {
-      console.log("hola");
-    }
-  };
   const handleChange = ({ target }) => {
     setState({ ...state, [target.name]: target.value });
-    verifyValidators();
   };
-
   const { handleLogin } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newUser = await handleLogin(state);
-
     if (newUser && newUser.message) {
       setError(newUser.message);
     }
-
     setState(initialState);
   };
 
@@ -53,10 +42,10 @@ const Login = ({ handleRenderNavNone }) => {
         <section className="authBackground" style={{ height: "100vh" }}>
           <div>
             <h1 className="authTitles titlesShadow">
-              Encuentra{" "}
+              Encuentra
               <p className="authTitles" style={{ padding: "0" }}>
                 el coche
-              </p>{" "}
+              </p>
               de tus sueños
             </h1>
           </div>

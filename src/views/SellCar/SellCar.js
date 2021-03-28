@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSafeDispatch } from "../../hooks/useSafeDispatch";
 import { getBrands } from "../../service/brand.service";
+import { CloseIcon, Icon } from "../../components/Layout/style";
 import {
   createAdvert,
   uploadFile,
@@ -21,6 +22,7 @@ import {
   SmallPhotoIcon,
   SendBtn,
   OptionsBar,
+  ErrorModal,
 } from "./style";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import Loading from "../../components/Loading/Loading";
@@ -53,13 +55,23 @@ const SellCar = ({ handleRenderNavNone }) => {
     fromWhere: "",
   };
 
+  const yearPickerRef = React.useRef();
   const [state, unsafeSetState] = useState(initialState);
   const [brands, setBrands] = useState([]);
   const [updateAdvert, setUpdateAdvert] = useState(initialState);
   const [updateWiew, setUpdateView] = useState(false);
   const [loading, setLoading] = useState(false);
   const [images, setImages] = useState({});
+  const [error, setError] = useState("");
+  const [badSubmit,setBadSubmit] = useState(false);
+  const [openErrorModal, setOpenErrorModal] = useState(false);
+
+
   const setState = useSafeDispatch(unsafeSetState);
+
+  const handleToggleErrorModal = () => {
+    setOpenErrorModal(!openErrorModal);
+  };
 
   const handleChange = (e) => {
     if (!advertId) {
@@ -127,27 +139,38 @@ const SellCar = ({ handleRenderNavNone }) => {
       setUpdateView(true);
     }
     setUpdateAdvert(data);
-    if(updateAdvert._id){
-      setLoading(true)
+
+    if (updateAdvert._id) {
+      setLoading(true);
     }
   };
-  console.log("update", updateAdvert);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!advertId) {
-      await createAdvert(state);
-      setState(initialState);
+    try {
+      if (!advertId) {
+        await createAdvert(state);
+        setState(initialState);
+      } else {
+        await updateAdvertService(updateAdvert);
+      }
+      goBack();
+    } catch (e) {
+      console.error(e);
+      setBadSubmit(true)
+      handleToggleErrorModal();
+      setError(e.response.data.message);
     }
-    await updateAdvertService(updateAdvert);
-    goBack();
   };
 
   const goBack = () => {
     history.goBack();
   };
+
   useEffect(() => {
-    getAdvertLoQueSea();
+    if (advertId) {
+      getAdvertLoQueSea();
+    }
     getAllBrands();
     handleRenderNavNone();
     setLoading(true);
@@ -300,6 +323,7 @@ const SellCar = ({ handleRenderNavNone }) => {
                 Año
               </label>
               <YearPicker
+              ref={yearPickerRef}
                 name="year"
                 onChange={handleChange}
                 className="margin10"
@@ -454,258 +478,286 @@ const SellCar = ({ handleRenderNavNone }) => {
               </SendBtn>
             </form>
           ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="flexColumn margin10 sellCar"
-            >
-              <div
-                style={{
-                  marginTop: "20px",
-                  display: "flex",
-                  justifyContent: "center",
-                  flexWrap: "wrap",
+            <>
+              <form
+                onSubmit={handleSubmit}
+                className="flexColumn margin10 sellCar"
+              >
+                <div
+                  style={{
+                    marginTop: "20px",
+                    display: "flex",
+                    justifyContent: "center",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  {[...Array(8)].map((item, idx) => (
+                    <PhotoInput>
+                      {images[`${idx}`] ? (
+                        <SmallPhotoIcon src={images[`${idx}`]} />
+                      ) : (
+                        <CameraICon badSubmit={!badSubmit ? false : !images[0] ? true : false} size={30} />
+                      )}
+                      <input
+                        type="file"
+                        name={`${idx}`}
+                        onChange={handleUpload}
+                      />
+                    </PhotoInput>
+                  ))}
+                </div>
+
+                <label htmlFor="type-Of-Car" className={!badSubmit ? "margin10 lineBottom" : !state.typeOfCar ? "margin10 redErrorLabelBottom" : "margin10 lineBottom" } >
+                  ¿Qué quieres anunciar?
+                </label>
+                <Select
+                  placeholder="Tipo de coche"
+                  defaultValue={""}
+                  options={typeOfCar}
+                  onChange={handleChange}
+                  className={`margin10 width70vw`}
+                  theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      primary75: "#54CC51",
+                      primary: "#08a045",
+                      primary50: "#BEF0BE",
+                      primary25: "#D5F0DB",
+                    },
+                  })}
+                />
+
+                <label htmlFor="address" className="margin10 lineBottom">
+                  Provincia
+                </label>
+                <Select
+                  placeholder={getAllAddress()[0].value}
+                  defaultValue={""}
+                  options={getAllAddress()}
+                  onChange={handleChange}
+                  className="margin10 width70vw"
+                  theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      primary75: "#54CC51",
+                      primary: "#08a045",
+                      primary50: "#BEF0BE",
+                      primary25: "#D5F0DB",
+                    },
+                  })}
+                />
+
+                <label htmlFor="de donde viene" className="margin10 lineBottom">
+                  ¿De donde es?
+                </label>
+                <Select
+                  placeholder={fromWhere[0].value}
+                  defaultValue={""}
+                  options={fromWhere}
+                  onChange={handleChange}
+                  className="margin10 width70vw"
+                  theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      primary75: "#54CC51",
+                      primary: "#08a045",
+                      primary50: "#BEF0BE",
+                      primary25: "#D5F0DB",
+                    },
+                  })}
+                />
+                <label htmlFor="brand-car" className={!badSubmit ? "margin10 lineBottom" : !state.brand ? "margin10 redErrorLabelBottom" : "margin10 lineBottom" }>
+                  ¿Qué marca de coche es?
+                </label>
+                <Select
+                  placeholder={"Abarth"}
+                  defaultValue={""}
+                  options={brands}
+                  onChange={handleChange}
+                  className="margin10 width70vw"
+                  theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      primary75: "#54CC51",
+                      primary: "#08a045",
+                      primary50: "#BEF0BE",
+                      primary25: "#D5F0DB",
+                    },
+                  })}
+                />
+
+                <label htmlFor="year" className={!badSubmit ? "margin10 lineBottom" : !state.year ? "margin10 redErrorLabelBottom" : "margin10 lineBottom" }>
+                  Año
+                </label>
+                <YearPicker
+                  ref={yearPickerRef}
+                  name="year"
+                  onChange={handleChange}
+                  className="margin10"
+                  placeholder="Selecciona el año"
+                />
+
+                <label htmlFor="fuel" className="margin10 lineBottom">
+                  Combustible
+                </label>
+                <Select
+                  placeholder={fuel[0].value}
+                  defaultValue={""}
+                  options={fuel}
+                  onChange={handleChange}
+                  className="margin10 width70vw"
+                  theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      primary75: "#54CC51",
+                      primary: "#08a045",
+                      primary50: "#BEF0BE",
+                      primary25: "#D5F0DB",
+                    },
+                  })}
+                />
+
+                <label
+                  htmlFor="typeOfTransmision"
+                  className="margin10 lineBottom"
+                >
+                  Tipo de cambio
+                </label>
+                <Select
+                  placeholder={typeOfTransmision[0].value}
+                  defaultValue={""}
+                  options={typeOfTransmision}
+                  onChange={handleChange}
+                  className="margin10 width70vw"
+                  theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      primary75: "#54CC51",
+                      primary: "#08a045",
+                      primary50: "#BEF0BE",
+                      primary25: "#D5F0DB",
+                    },
+                  })}
+                />
+
+                <label htmlFor="Kilometraje" className="margin10 lineBottom">
+                  ¿Cuantos km tiene?
+                </label>
+                <input
+                  placeholder="km"
+                  type="number"
+                  name="km"
+                  onChange={handleChange}
+                  value={state.km}
+                  className="margin10 width70vw leftMargin18"
+                />
+
+                <label htmlFor="model" className={!badSubmit ? "margin10 lineBottom" : !state.model ? "margin10 redErrorLabelBottom" : "margin10 lineBottom" }>
+                  Modelo
+                </label>
+                <input
+                  placeholder="Mustang Fastback*"
+                  type="text"
+                  name="model"
+                  onChange={handleChange}
+                  value={state.model}
+                  className="margin10 width70vw leftMargin18"
+                />
+
+                <label htmlFor="Caballos" className="margin10 lineBottom">
+                  CV
+                </label>
+                <input
+                  placeholder="200*"
+                  type="number"
+                  name="horsePower"
+                  onChange={handleChange}
+                  value={state.horsePower}
+                  className="margin10 width70vw leftMargin18"
+                />
+
+                <label htmlFor="color" className="margin10 lineBottom">
+                  Color
+                </label>
+                <Select
+                  placeholder={colors[0].value}
+                  defaultValue={""}
+                  options={colors}
+                  onChange={handleChange}
+                  className="margin10 width70vw"
+                  theme={(theme) => ({
+                    ...theme,
+                    colors: {
+                      ...theme.colors,
+                      primary75: "#54CC51",
+                      primary: "#08a045",
+                      primary50: "#BEF0BE",
+                      primary25: "#D5F0DB",
+                    },
+                  })}
+                />
+
+                <label htmlFor="Precio" className="margin10 lineBottom">
+                  Precio
+                </label>
+                <input
+                  placeholder="30000*"
+                  type="number"
+                  name="price"
+                  onChange={handleChange}
+                  value={state.price}
+                  className="margin10 width70vw leftMargin18"
+                />
+
+                <label
+                  htmlFor="Otra-informacion"
+                  className="margin10 lineBottom"
+                >
+                  ¿Quieres indicar algo más?
+                </label>
+                <textarea
+                  placeholder="Cuentanos un poco sobre los extras y la vida que ha tenido...."
+                  name="otherInformation"
+                  cols="30"
+                  rows="10"
+                  onChange={handleChange}
+                  value={state.otherInformation}
+                  className="margin10 width70vw"
+                />
+
+                <SendBtn type="submit" className="margin10">
+                  Vender
+                </SendBtn>
+              </form>
+              <ErrorModal
+                isOpen={openErrorModal}
+                onClick={() => {
+                  handleToggleErrorModal();
                 }}
               >
-                {[...Array(8)].map((item, idx) => (
-                  <PhotoInput>
-                    {images[`${idx}`] ? (
-                      <SmallPhotoIcon src={images[`${idx}`]} />
-                    ) : (
-                      <CameraICon size={30} />
-                    )}
-                    <input
-                      type="file"
-                      name={`${idx}`}
-                      onChange={handleUpload}
-                    />
-                  </PhotoInput>
-                ))}
-              </div>
-
-              <label htmlFor="type-Of-Car" className="margin10 lineBottom">
-                ¿Qué quieres anunciar?
-              </label>
-              <Select
-                placeholder="Tipo de coche"
-                defaultValue={""}
-                options={typeOfCar}
-                onChange={handleChange}
-                className="margin10 width70vw"
-                theme={(theme) => ({
-                  ...theme,
-                  colors: {
-                    ...theme.colors,
-                    primary75: "#54CC51",
-                    primary: "#08a045",
-                    primary50: "#BEF0BE",
-                    primary25: "#D5F0DB",
-                  },
-                })}
-              />
-
-              <label htmlFor="address" className="margin10 lineBottom">
-                Provincia
-              </label>
-              <Select
-                placeholder={getAllAddress()[0].value}
-                defaultValue={""}
-                options={getAllAddress()}
-                onChange={handleChange}
-                className="margin10 width70vw"
-                theme={(theme) => ({
-                  ...theme,
-                  colors: {
-                    ...theme.colors,
-                    primary75: "#54CC51",
-                    primary: "#08a045",
-                    primary50: "#BEF0BE",
-                    primary25: "#D5F0DB",
-                  },
-                })}
-              />
-
-              <label htmlFor="de donde viene" className="margin10 lineBottom">
-                ¿De donde es?
-              </label>
-              <Select
-                placeholder={fromWhere[0].value}
-                defaultValue={""}
-                options={fromWhere}
-                onChange={handleChange}
-                className="margin10 width70vw"
-                theme={(theme) => ({
-                  ...theme,
-                  colors: {
-                    ...theme.colors,
-                    primary75: "#54CC51",
-                    primary: "#08a045",
-                    primary50: "#BEF0BE",
-                    primary25: "#D5F0DB",
-                  },
-                })}
-              />
-              <label htmlFor="brand-car" className="margin10 lineBottom">
-                ¿Qué marca de coche es?
-              </label>
-              <Select
-                placeholder={"Abarth"}
-                defaultValue={""}
-                options={brands}
-                onChange={handleChange}
-                className="margin10 width70vw"
-                theme={(theme) => ({
-                  ...theme,
-                  colors: {
-                    ...theme.colors,
-                    primary75: "#54CC51",
-                    primary: "#08a045",
-                    primary50: "#BEF0BE",
-                    primary25: "#D5F0DB",
-                  },
-                })}
-              />
-
-              <label htmlFor="year" className="margin10 lineBottom">
-                Año
-              </label>
-              <YearPicker
-                name="year"
-                onChange={handleChange}
-                className="margin10"
-                placeholder="Selecciona el año"
-              />
-
-              <label htmlFor="fuel" className="margin10 lineBottom">
-                Combustible
-              </label>
-              <Select
-                placeholder={fuel[0].value}
-                defaultValue={""}
-                options={fuel}
-                onChange={handleChange}
-                className="margin10 width70vw"
-                theme={(theme) => ({
-                  ...theme,
-                  colors: {
-                    ...theme.colors,
-                    primary75: "#54CC51",
-                    primary: "#08a045",
-                    primary50: "#BEF0BE",
-                    primary25: "#D5F0DB",
-                  },
-                })}
-              />
-
-              <label
-                htmlFor="typeOfTransmision"
-                className="margin10 lineBottom"
-              >
-                Tipo de cambio
-              </label>
-              <Select
-                placeholder={typeOfTransmision[0].value}
-                defaultValue={""}
-                options={typeOfTransmision}
-                onChange={handleChange}
-                className="margin10 width70vw"
-                theme={(theme) => ({
-                  ...theme,
-                  colors: {
-                    ...theme.colors,
-                    primary75: "#54CC51",
-                    primary: "#08a045",
-                    primary50: "#BEF0BE",
-                    primary25: "#D5F0DB",
-                  },
-                })}
-              />
-
-              <label htmlFor="Kilometraje" className="margin10 lineBottom">
-                ¿Cuantos km tiene?
-              </label>
-              <input
-                placeholder="km"
-                type="number"
-                name="km"
-                onChange={handleChange}
-                value={state.km}
-                className="margin10 width70vw leftMargin18"
-              />
-
-              <label htmlFor="model" className="margin10 lineBottom">
-                Modelo
-              </label>
-              <input
-                placeholder="Mustang Fastback*"
-                type="text"
-                name="model"
-                onChange={handleChange}
-                value={state.model}
-                className="margin10 width70vw leftMargin18"
-              />
-
-              <label htmlFor="Caballos" className="margin10 lineBottom">
-                CV
-              </label>
-              <input
-                placeholder="200*"
-                type="number"
-                name="horsePower"
-                onChange={handleChange}
-                value={state.horsePower}
-                className="margin10 width70vw leftMargin18"
-              />
-
-              <label htmlFor="color" className="margin10 lineBottom">
-                Color
-              </label>
-              <Select
-                placeholder={colors[0].value}
-                defaultValue={""}
-                options={colors}
-                onChange={handleChange}
-                className="margin10 width70vw"
-                theme={(theme) => ({
-                  ...theme,
-                  colors: {
-                    ...theme.colors,
-                    primary75: "#54CC51",
-                    primary: "#08a045",
-                    primary50: "#BEF0BE",
-                    primary25: "#D5F0DB",
-                  },
-                })}
-              />
-
-              <label htmlFor="Precio" className="margin10 lineBottom">
-                Precio
-              </label>
-              <input
-                placeholder="30000*"
-                type="number"
-                name="price"
-                onChange={handleChange}
-                value={state.price}
-                className="margin10 width70vw leftMargin18"
-              />
-
-              <label htmlFor="Otra-informacion" className="margin10 lineBottom">
-                ¿Quieres indicar algo más?
-              </label>
-              <textarea
-                placeholder="Cuentanos un poco sobre los extras y la vida que ha tenido...."
-                name="otherInformation"
-                cols="30"
-                rows="10"
-                onChange={handleChange}
-                value={state.otherInformation}
-                className="margin10 width70vw"
-              />
-
-              <SendBtn type="submit" className="margin10">
-                Vender
-              </SendBtn>
-            </form>
+                <Icon style={{ top: "35%" }}>
+                  <CloseIcon
+                    style={{ color: "white" }}
+                    onClick={() => {
+                      handleToggleErrorModal();
+                    }}
+                  />
+                </Icon>
+                <div
+                  className="positionCenterDiv"
+                  id="errorMessageForms"
+                  style={{ backgroundColor: "white" }}
+                >
+                  <p>{error}</p>
+                </div>
+              </ErrorModal>
+            </>
           )}
         </>
       ) : (

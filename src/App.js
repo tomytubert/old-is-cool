@@ -8,11 +8,12 @@ import AnonRoute from "./components/Routes/AnonRoute";
 import PrivateRoute from "./components/Routes/PrivateRoute";
 import AdvertDetail from "./views/AdvertDetail/AdvertDetail";
 import SellCar from "./views/SellCar/SellCar";
-import { Switch, Route, useParams } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import AdvertList from "./views/AdvertList/AdvertList";
 import SideBar from "./components/Layout/SideBar";
 import Profile from "./views/Profile/Profile";
 import Messages from "./views/Messages/Messages";
+import NotFound from "./views/NotFound/NotFound"
 
 function App() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -68,6 +69,9 @@ function App() {
         <PrivateRoute exact path="/profile/:userId">
           <Profile handleRenderNavNone={handleRenderNavNone} handleRenderNavYes={handleRenderNavYes} />
         </PrivateRoute>
+        <Route path="*">
+          <NotFound handleRenderNavYes={handleRenderNavYes} />
+        </Route>
       </Switch>
     </div>
   );

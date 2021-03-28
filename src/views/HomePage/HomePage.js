@@ -24,6 +24,8 @@ const HomePage = ({handleRenderNavYes,setAdvertsQuery}) => {
     price: 0,
     fromWhere: "",
   };
+
+  const yearPickerRef = React.useRef();
   const [images, setImages] = useState([]);
   const [howMany, setHowMany] = useState(0);
   const [brands, setBrands] = useState([]);
@@ -135,6 +137,7 @@ const HomePage = ({handleRenderNavYes,setAdvertsQuery}) => {
                 Año
               </label>
               <YearPicker
+              ref={yearPickerRef}
                 name="year"
                 onChange={handleChange}
                 className="margin10"
