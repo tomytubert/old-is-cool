@@ -471,6 +471,12 @@ textarea {
   border-radius: 50%;
   padding: 7px;
 }
+@media (min-width: 768px) {
+  .sellIconCard {
+    top: -215px;
+    left: -50px;
+  }
+}
 
 #photoModalSoldOut {
   width: 150px;

@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuth } from "../../context/AuthContext.utils";
+import PropTypes from "prop-types"
 import {
   SideBarContainer,
   Icon,
@@ -36,5 +37,15 @@ const SideBar = ({ isOpen, handleToggle }) => {
     </SideBarContainer>
   );
 };
+SideBar.defaultProps = {
+  handleToggle: () => {
+    return false
+  },
+  isOpen: false
+}
+SideBar.propTypes = {
+  handleToggle: PropTypes.func,
+  isOpen: PropTypes.bool
+}
 
 export default SideBar;

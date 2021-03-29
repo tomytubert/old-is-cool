@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../../context/AuthContext.utils";
+import { useHistory, useParams } from "react-router-dom";
+import PropTypes from "prop-types"
 import { useSafeDispatch } from "../../hooks/useSafeDispatch";
 import { getBrands } from "../../service/brand.service";
-import { CloseIcon, Icon } from "../../components/Layout/style";
 import {
   createAdvert,
   uploadFile,
@@ -16,6 +18,7 @@ import {
   getAllAddress,
   fromWhere,
 } from "./data";
+import { CloseIcon, Icon } from "../../components/Layout/style";
 import {
   CameraICon,
   PhotoInput,
@@ -28,9 +31,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import Loading from "../../components/Loading/Loading";
 import Select from "react-select";
 import YearPicker from "react-year-picker";
-import { useAuth } from "../../context/AuthContext.utils";
-import { useHistory, useParams } from "react-router-dom";
-import { update } from "../../service/auth.service";
+
 
 const SellCar = ({ handleRenderNavNone }) => {
   const { user } = useAuth();
@@ -766,5 +767,14 @@ const SellCar = ({ handleRenderNavNone }) => {
     </section>
   );
 };
+
+SellCar.defaultProps = {
+  handleRenderNavNone: () => {
+    return false
+  }
+}
+SellCar.propTypes = {
+  handleRenderNavNone: PropTypes.func
+}
 
 export default SellCar;
