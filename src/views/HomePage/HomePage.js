@@ -16,10 +16,6 @@ import {
 } from "../AdvertDetail/styles";
 import { FindBtn, Btn } from "./style";
 
-
-
-
-
 const HomePage = ({handleRenderNavYes,setAdvertsQuery}) => {
   const initialState = {
     brand: "",
