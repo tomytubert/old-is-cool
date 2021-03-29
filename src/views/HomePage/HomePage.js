@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { BiCar } from "react-icons/bi";
-// import {useQuery} from "react-query"
+import PropTypes from "prop-types"
+import qs from "qs";
+import {fromWhere} from "../SellCar/data";
+import Select from "react-select";
+import YearPicker from "react-year-picker";
+import { getAdverts, findAdverts } from "../../service/advert.service";
+import { getBrands } from "../../service/brand.service";
+import Loading from "../../components/Loading/Loading";
 import {
   Holster,
   CarouselHomePage,
   AdvertWrapPhoto,
   AdvertPhotoHomePage,
 } from "../AdvertDetail/styles";
-import {fromWhere} from "../SellCar/data";
-import { getAdverts, findAdverts } from "../../service/advert.service";
 import { FindBtn, Btn } from "./style";
-import qs from "qs";
-import Loading from "../../components/Loading/Loading";
-import { getBrands } from "../../service/brand.service";
-import Select from "react-select";
-import YearPicker from "react-year-picker";
+
+
+
+
 
 const HomePage = ({handleRenderNavYes,setAdvertsQuery}) => {
   const initialState = {
@@ -24,6 +27,8 @@ const HomePage = ({handleRenderNavYes,setAdvertsQuery}) => {
     price: 0,
     fromWhere: "",
   };
+
+  const yearPickerRef = React.useRef();
   const [images, setImages] = useState([]);
   const [howMany, setHowMany] = useState(0);
   const [brands, setBrands] = useState([]);
@@ -135,6 +140,7 @@ const HomePage = ({handleRenderNavYes,setAdvertsQuery}) => {
                 Año
               </label>
               <YearPicker
+              ref={yearPickerRef}
                 name="year"
                 onChange={handleChange}
                 className="margin10"
@@ -261,5 +267,16 @@ const HomePage = ({handleRenderNavYes,setAdvertsQuery}) => {
     </>
   );
 };
+
+HomePage.defaultProps = {
+  handleRenderNavYes: () => {
+    return true
+  }
+}
+
+HomePage.propTypes = {
+  handleRenderNavYes: PropTypes.func,
+}
+
 
 export default HomePage;

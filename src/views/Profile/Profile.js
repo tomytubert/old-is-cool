@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams, Link } from "react-router-dom";
+import PropTypes from "prop-types"
 import { findUser } from "../../service/auth.service";
 import { PhotoInput } from "../AdvertDetail/styles";
 import { getPurchasesSeller } from "../../service/purchases.service";
@@ -28,7 +29,7 @@ import {
 import AdvertCard from "../../components/AdvertCard/AdvertCard";
 import { uploadFile } from "../../service/advert.service";
 import { update } from "../../service/auth.service";
-import { GiCrystalGrowth } from "react-icons/gi";
+
 
 const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
    const { user } = useAuth();
@@ -367,5 +368,18 @@ const Profile = ({ handleRenderNavNone, handleRenderNavYes }) => {
     </>
   );
 };
+
+Profile.defaultProps = {
+  handleRenderNavNone: () => {
+    return false
+  },
+  handleRenderNavYes: () => {
+    return true
+  }
+}
+Profile.propTypes = {
+  handleRenderNavNone: PropTypes.func,
+  handleRenderNavYes: PropTypes.func
+}
 
 export default Profile;

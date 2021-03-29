@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types"
 import AdvertCard from "../../components/AdvertCard/AdvertCard";
+import Loading from "../../components/Loading/Loading";
 import { getAdverts } from "../../service/advert.service";
 import { getUser } from "../../service/auth.service";
-import Loading from "../../components/Loading/Loading";
 import { useAuth } from "../../context/AuthContext.utils";
 
 const AdvertList = ({ handleRenderNavYes, adverts }) => {
@@ -74,4 +75,34 @@ const AdvertList = ({ handleRenderNavYes, adverts }) => {
   );
 };
 
+AdvertList.defaultProps = {
+  handleRenderNavNone: () => {
+    return false
+  },
+  adverts: []
+}
+
+AdvertList.propTypes = {
+  handleRenderNavYes: PropTypes.func,
+  adverts: PropTypes.arrayOf(
+    PropTypes.shape({
+      typeOfCar: PropTypes.string.isRequired,
+      image:PropTypes.arrayOf(PropTypes.string).isRequired,
+      brand:PropTypes.string.isRequired ,
+      year:PropTypes.string.isRequired ,
+      fuel:PropTypes.string ,
+      model:PropTypes.string.isRequired ,
+      horsePower:PropTypes.number ,
+      color:PropTypes.string ,
+      otherInformation:PropTypes.string ,
+      typeOfTransmision:PropTypes.string ,
+      km:PropTypes.number ,
+      fromWhere:PropTypes.string ,
+      price:PropTypes.number ,
+      address:PropTypes.string ,
+      user:PropTypes.string.isRequired ,
+      soldOut: PropTypes.bool
+    })
+  ),
+}
 export default AdvertList;

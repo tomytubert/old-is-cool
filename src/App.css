@@ -365,7 +365,7 @@ textarea {
   }
 }
 
-#soldOutModalBox{
+#soldOutModalBox {
   position: absolute;
   top: 30%;
   align-items: center;
@@ -437,6 +437,29 @@ textarea {
     bottom: auto;
   }
 }
+#submitBtnSingUp {
+  width: 80px;
+  height: 80px;
+  position: fixed;
+  left: 75vw;
+  bottom: 440px;
+  z-index: 10;
+  color: rgb(8, 160, 69);
+}
+@media (min-width: 768px) {
+  #submitBtnSingUp {
+    position: fixed;
+    left: 65vw;
+    top: 30vh;
+    bottom: auto;
+  }
+}
+.positionCenterDiv {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+}
 
 .sellIconCard {
   position: relative;
@@ -448,6 +471,12 @@ textarea {
   border-radius: 50%;
   padding: 7px;
 }
+@media (min-width: 768px) {
+  .sellIconCard {
+    top: -215px;
+    left: -50px;
+  }
+}
 
 #photoModalSoldOut {
   width: 150px;
@@ -457,3 +486,28 @@ textarea {
   margin-bottom: 0;
   background-color: white;
 }
+
+#wrapperNotFoundPhoto {
+  position: relative;
+  top: -100px;
+  left: -5%;
+}
+#notFoundPhoto {
+  width: 110%;
+}
+
+#errorMessageForms {
+  background-color: white;
+  height: 100px;
+  width: 90%;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.redErrorLabelBottom{
+  padding-bottom: 5px;
+  border-bottom: 1px solid red;
+}
+

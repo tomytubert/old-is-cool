@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types"
 import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 import { Nav, NavBarContainer, NavLogo, MobileIcon,MobileIcon1 } from "./style";
@@ -32,5 +33,14 @@ const Navbar = ({handleToggle}) => {
     </Nav>
   );
 };
+
+Navbar.defaultProps = {
+  handleToggle: () => {
+    return false
+  }
+}
+Navbar.propTypes = {
+  handleToggle: PropTypes.func
+}
 
 export default Navbar;

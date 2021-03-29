@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types"
 import { NavMenu, NavBtnLink } from "./style";
 import { useAuth } from "../../context/AuthContext.utils";
 const SignedInLinks = ({ userId }) => {
@@ -17,5 +17,12 @@ const SignedInLinks = ({ userId }) => {
     </NavMenu>
   );
 };
+
+SignedInLinks.defaultProps = {
+  userId: ""
+}
+SignedInLinks.propTypes = {
+  userId: PropTypes.string
+}
 
 export default SignedInLinks;

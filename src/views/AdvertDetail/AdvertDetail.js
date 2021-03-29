@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
+import PropTypes from "prop-types"
+import { getLocalUser } from "../../context/AuthContext.utils";
 import {
   getAdvert,
   likedAdvert,
@@ -9,7 +11,10 @@ import {
 import { createPurchases } from "../../service/purchases.service";
 import { sell } from "../../service/auth.service";
 import Loading from "../../components/Loading/Loading";
-import { GiTakeMyMoney } from "react-icons/gi";
+import Modal from "./Modal";
+import { EditContainer } from "../Profile/style";
+import { CameraICon, SmallPhotoIcon } from "../SellCar/style";
+import { CloseIcon, Icon } from "../../components/Layout/style";
 import {
   Holster,
   Carousel,
@@ -25,10 +30,7 @@ import {
   AcceptsSoldOut,
   DeclineSoldOut,
 } from "./styles";
-import { EditContainer } from "../Profile/style";
-import { CameraICon, SmallPhotoIcon } from "../SellCar/style";
-import { CloseIcon, Icon } from "../../components/Layout/style";
-import Modal from "./Modal";
+import { GiTakeMyMoney } from "react-icons/gi";
 import { CgCalendarDates } from "react-icons/cg";
 import { MdDone } from "react-icons/md";
 import { IoIosArrowRoundBack } from "react-icons/io";
@@ -39,7 +41,6 @@ import {
   IoWaterOutline,
 } from "react-icons/io5";
 import { FiEdit } from "react-icons/fi";
-import { getLocalUser } from "../../context/AuthContext.utils";
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import { GrManual } from "react-icons/gr";
 import { BsGear } from "react-icons/bs";
@@ -108,16 +109,19 @@ const AdvertDetail = ({ handleRenderNavNone }) => {
     history.push(`/editar/${advertId}`);
   };
 
+  const notLoggedGoLogin = () => {
+    history.push("/login")
+  }
+
   const goBack = () => {
     history.goBack();
   };
 
-  console.log("state", state);
   useEffect(() => {
     getAdvertLoQueSea();
     handleRenderNavNone();
   }, []);
-
+  
   return (
     <>
       {loading ? (
@@ -148,7 +152,11 @@ const AdvertDetail = ({ handleRenderNavNone }) => {
             ) : (
               <span
                 onClick={() => {
-                  handleOnClick(advertId);
+                  if(user.id){
+                    handleOnClick(advertId);
+                  } else {
+                    notLoggedGoLogin();
+                  }
                 }}
               >
                 {like ? (
@@ -395,4 +403,12 @@ const AdvertDetail = ({ handleRenderNavNone }) => {
   );
 };
 
+AdvertDetail.defaultProps = {
+  handleRenderNavNone: () => {
+    return false
+  }
+}
+AdvertDetail.propTypes = {
+  handleRenderNavNone: PropTypes.func
+}
 export default AdvertDetail;

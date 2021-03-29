@@ -72,6 +72,7 @@ export const Carousel = styled.div`
     scroll-snap-align: center;
     flex: none;
     width: 30vw;
+    overflow-y: scroll;
   }
   @media screen and (max-width: 768px) {
     div {

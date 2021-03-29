@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import PropTypes from "prop-types"
 import { likedAdvert, unLikedAdvert } from "../../service/advert.service";
-import { getUser } from "../../service/auth.service";
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import { GiTakeMyMoney } from "react-icons/gi";
 import {
@@ -121,5 +121,35 @@ const AdvertCard = ({ props, likedAdverts, userIsLogged }) => {
     </>
   );
 };
+
+
+AdvertCard.defaultProps = {
+  likedAdverts: [],
+  userIsLogged: false,
+  props: {}
+}
+
+AdvertCard.propTypes = {
+  likedAdvert: PropTypes.arrayOf(PropTypes.string),
+  userIsLogged: PropTypes.bool,
+  props: PropTypes.shape({
+      typeOfCar: PropTypes.string.isRequired,
+      image:PropTypes.arrayOf(PropTypes.string).isRequired,
+      brand:PropTypes.string.isRequired ,
+      year:PropTypes.string.isRequired ,
+      fuel:PropTypes.string ,
+      model:PropTypes.string.isRequired ,
+      horsePower:PropTypes.number ,
+      color:PropTypes.string ,
+      otherInformation:PropTypes.string ,
+      typeOfTransmision:PropTypes.string ,
+      km:PropTypes.number ,
+      fromWhere:PropTypes.string ,
+      price:PropTypes.number ,
+      address:PropTypes.string ,
+      user:PropTypes.string.isRequired ,
+      soldOut: PropTypes.bool
+    })
+}
 
 export default AdvertCard;
