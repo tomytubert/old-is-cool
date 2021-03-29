@@ -67,6 +67,7 @@ export const Carousel = styled.div`
   flex: none;
   flex-flow: row nowrap;
   scroll-snap-type: x mandatory;
+  height: 280px;
   div {
     text-align: center;
     scroll-snap-align: center;
@@ -77,7 +78,6 @@ export const Carousel = styled.div`
   @media screen and (max-width: 768px) {
     div {
       width: 90vw;
-      margin-bottom: -20px;
     }
   }
 `;
