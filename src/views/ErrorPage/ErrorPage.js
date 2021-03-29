@@ -16,8 +16,8 @@ const NotFound = () => {
         className="margin0Auto positionCenterDiv"
         style={{ height: "500px", width: "300px" }}
       >
-        <div>
-          <h2 className="textAlignCenter" style={{ marginTop: "-60px" }}>
+        <div className="margin0Auto positionCenterDiv">
+          <h2 className="textAlignCenter">
             Vaya!, Hemos tendio un Error
           </h2>
           <p className="textAlignCenter" style={{ marginTop: "20px" }}>

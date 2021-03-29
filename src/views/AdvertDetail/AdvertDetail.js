@@ -68,7 +68,7 @@ const AdvertDetail = ({ handleRenderNavNone }) => {
   const getAdvertLoQueSea = async () => {
     const { data } = await getAdvert(advertId);
     setState(data);
-
+    console.log("data",data);
     data.contacts.forEach((item, idx) => {
       if (item === user.id) {
         setContacted(true);
@@ -103,6 +103,7 @@ const AdvertDetail = ({ handleRenderNavNone }) => {
   const handleToggleColor = () => {
     setColorTick(!colorTick);
   };
+
   const verifyAuth = () => (state.user._id === user.id ? true : false);
 
   const goEditRoute = () => {
@@ -293,14 +294,14 @@ const AdvertDetail = ({ handleRenderNavNone }) => {
               />
             </Icon>
             <div style={{ marginTop: "30%" }}>
-              {state.contacts.map((contact, idx) => (
+              {state.contacts[0] && state.contacts.map((contact, idx) => (
                 <div
                   id="messageSoldOutRow"
                   className="boxShadow"
                 >
                   <div>
                     <PhotoInput>
-                      {contact.img ? (
+                      {contact.img[0] ? (
                         <SmallPhotoIcon
                           src={contact.img}
                           style={{
