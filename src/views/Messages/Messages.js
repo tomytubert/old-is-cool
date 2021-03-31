@@ -30,14 +30,16 @@ const Messages = () => {
   const openOpinionModal = () => {
     setOpinionModal(!opinionModal);
   };
+  
 
-  const sendOpinion = async (sellerId) => {
-    const userOpinion = await updatePurchases(userId, opinion);
+  const sendOpinion = async (purchasesId) => {
+    const userOpinion = await updatePurchases(purchasesId, opinion);
   };
 
   const updateSellerRating = async (sellerId) => {
     const userRating = await updateRating(sellerId,opinion.rating)
   }
+  
   const getUserData = async () => {
     const { data } = await getUser();
     setAdverts(data.adverts);
@@ -46,7 +48,7 @@ const Messages = () => {
 
   const handleSubmitOpinion = (e) => {
     e.preventDefault();
-    sendOpinion();
+    // sendOpinion();
     history.push(`/profile/${userId}`);
   };
 
@@ -234,7 +236,11 @@ const Messages = () => {
                         className="margin10 width70vw"
                       />
                       <div style={{ margin: "20px 0" }}>
-                        <Btn type="submit" onClick={()=>{updateSellerRating(item.seller._id)}} className="margin10">
+                        {/* <Btn type="submit" onClick={()=>{updateSellerRating(item._id)}} className="margin10"> */}
+                        <Btn type="submit" onClick={()=>{
+                          updateSellerRating(item.seller._id)
+                          sendOpinion(item._id)
+                          }} className="margin10">
                           Valorar
                         </Btn>
                       </div>
